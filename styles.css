@@ -1,0 +1,748 @@
+       /* Re-Add Once Coded html {
+            scroll-behavior: smooth;
+        } */
+
+/*Navigation Bar*/
+        .navBar {
+            top: 0;
+            left: 0;
+            margin: 0;
+            background-color: none;
+            position: absolute;
+            width: 100vw;
+            max-width: 100%;
+            height: 50px;
+            z-index: 1;
+        }
+
+        .homeIcon {
+            display: block;
+            position: relative;
+            top: 10px;
+            width: 18px;
+            margin: 0px 0px 0px 10px;
+            float: left;
+            z-index: 4;
+        }
+
+        .homeIconSVGPath {
+            fill: #fff;
+        }
+
+        .homeIconSVGPath:hover {
+            fill: #B5DFE0;
+        }
+
+        .navWrapper {
+            align-self: right;
+        }
+
+        .text-navWrapper {
+            display: none;
+        }
+
+       
+
+/*Menu Styles*/
+    .navWrapper, .nav, .menu li {
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        z-index: 2;
+    }
+
+    .nav {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: #212121;
+        padding: none;
+        border-radius: 2px;
+        overflow: hidden;
+        max-width: 100%;
+    }
+
+    .menu {
+        position: relative;
+        left: -12%;
+        margin: 0;
+        padding: 0;
+        width: 0;
+        overflow: hidden;
+        display: none;
+    }
+
+    .nav input:checked ~ .menu {
+        width: 100vw;
+        max-width: 100%;
+        display: inline-block;
+    }
+
+    .menu li {
+        list-style: none;
+        margin: 10px 10px 42px 0px;
+        font-weight: 900;
+        line-height: 1.2em;
+        align-content: left;
+    }
+
+    .menu li a {
+        text-decoration: none;
+        font-size: 1.125em;
+    }
+
+    .menu li a:hover {
+        color: #B5DFE0;
+        transition: 0.1s;
+        text-decoration: underline;
+    }
+
+    /*margin: 70% 0px 0px 0px;*/
+
+    @media only screen and (min-width: 500px) {
+        .nav input:checked ~ .menu {
+            width: 100vw;
+            max-width: 100%;
+        }
+        .menu li {
+            list-style: none;
+        }
+
+        #menu-foot {
+            width: 80%;
+            margin: 40% 0px 0px 0px;
+        }  
+
+    }
+
+/*Nav Icon*/
+    .nav input {
+        position: relative;
+        right: 0px;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        opacity: 0;
+    }
+    
+    .nav input:checked  {
+        position: relative;
+        height: 100vh;
+        max-height: 100%;
+    }
+
+    /*.nav :not(input:checked) {
+        transition: 0.35s;
+    }*/
+
+    .nav span {
+        position: absolute;
+        top: 20px;
+        right: 10px;
+        width: 30px;
+        height: 3px;
+        border-radius: 5px;
+        background-color: #ffffff;
+        pointer-events: none;
+        z-index: 5;
+        transition-duration: 0.5s;
+    }
+
+    .nav span:hover {
+        background-color: #B5DFE0;
+    }
+
+    .nav input:checked ~ span {
+        background-color: #B5DFE0;
+    }
+
+    .nav input:checked ~ span:nth-child(4) {
+        transform: translateY(0) rotate(-45deg);
+    }
+
+    .nav span:nth-child(2) {
+        transform: translateY(-8px);
+    }
+
+    .nav input:checked ~ span:nth-child(2) {
+        transform: translateY(0) rotate(-45deg);
+    }
+    .nav span:nth-child(3) {
+        transform: translateY(8px);
+    }
+
+    .nav input:checked ~ span:nth-child(3) {
+        transform: translateY(0) rotate(45deg);
+        background-color: #B5DFE0;
+        z-index: 4;
+    }
+
+    .nav span:nth-child(4) {
+        transform: translateY(0px);
+    }
+
+    .nav input:checked ~ span:nth-child(4) {
+        transform: translateY(0) rotate(-45deg);
+    }
+
+    input:checked {
+        position: absolute;
+        right: -85%;
+        width: 200px;
+    }
+
+/*Close Nav Icon*/
+
+/*Tablet Breakpoint*/
+ @media only screen and (min-width: 760px){
+
+    #navTitlemob {
+        display: none;
+    }
+
+    .navWrapper {
+        display: none;
+    }
+
+    .nav span {
+        top: 38px;
+    }
+
+    .navTitle {
+        position: absolute;
+        display: block;
+        left: 0;
+        right: 0;
+        top: 0;
+        margin-left: 125px;
+        margin-right: auto;
+        text-align: left;
+        padding: 0px 0px 0px 0px;
+        line-height: 0pt;
+    }
+}
+/*Tablet Breakpoint Close*/
+
+/*Text Nav*/
+@media only screen and (min-width: 760px) {
+    .text-navWrapper {
+        display: block;
+        position: absolute;
+    }
+
+    .text-nav {
+        position: absolute;
+        padding: 0px 5px 0px 0px;
+        transition: 0.5s;
+        border-radius: 2px;
+        overflow: hidden;
+    }
+
+    .text-navWrapper, .text-nav, .textMenu {
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        top: 5px;
+        right: 0px;
+    }
+
+    .textMenu li {
+        list-style: none;
+        margin: 0 10px;
+        white-space: nowrap;
+    }
+
+    .textMenu li a {
+        font-weight: 900;
+        transition: 0.5s;
+    }
+
+    .textMenu li a:hover {
+        color: #B5DFE0;
+        text-decoration: underline;
+        transition: 0.1s;
+    }
+}
+/*Text Nav Close*/
+/*Menu Styles Close*/
+
+/*Body Settings*/
+    body {
+        position: relative;
+        font-family: 'Nunito', arial, sans-serif;
+        font-weight: 400;
+        font-size: 1em;
+        line-height: 1.4em;
+        color: #ffffff;
+        background-color: #212121;
+        margin: 0px 0px 0px 0px;
+        min-height: 100vh;
+    }
+
+    #bodyContent {
+        padding-top: 130px;
+        padding-bottom: 50px;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    a {
+        color: inherit;
+        background-color: inherit;
+        text-decoration: inherit;
+        cursor: pointer;
+    }
+
+    a:hover {
+        color: inherit;
+        background-color: inherit;
+        text-decoration: inherit;
+        cursor: pointer;
+    }
+
+    .designLink {
+        text-decoration: underline;
+        color: #B5DFE0;
+    }
+
+    .bodyLink {
+        text-decoration: underline;
+        color:#B5DFE0
+    }
+
+    .bodyLink:visited {
+        color: #f0f0f0;
+        text-decoration: underline;
+    }
+
+    .bodyLink:hover {
+        color: #CEC177;
+        text-decoration: underline;
+    }
+
+    .bodyLink:active {
+        color: #800020;
+        text-decoration: underline;
+    }
+
+    .hideMob {
+        display: none;
+    }
+
+    h1 {
+        font-weight: 900;
+        font-size: 1em;
+        line-height: 1.2em;
+        padding: 3em 0px 1em 0px;
+     }
+ 
+    h2 {
+        font-weight: 900;
+        font-size: 1em;
+        line-height: 1.2em;
+        color: #B5DFE0;
+        padding: 1em 0em 0em 0em;
+    }
+
+    p {
+        display: block;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+    }
+
+    .paddingDeficit {
+        padding-top: 0em;
+    }
+
+    #bodyContent ul {
+        list-style-type: circle;
+    }
+
+    #bodyContent li {
+        padding-bottom: 10px;
+    }
+
+    .dateSub {
+        font-weight: 900;
+    }
+
+    .imageAsset {
+        padding-top: 10px;
+        width: 100%;
+    }
+
+    .divider {
+        border: none;
+        height: 3px;
+        background-color: #7e7e7e;
+        width: 42px;
+    }
+
+    .arrow {
+        margin: auto;
+        width: 235px;
+    }
+
+    .arrowHead {
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 13px solid #B5DFE0;
+        margin: 0px auto;
+    }
+
+    .arrowShaft {
+        height: 12px;
+        width: 10px;
+        background-color: #B5DFE0;
+        margin: 0px auto;
+    }
+
+/*body flex*/
+
+    .gridContainer {
+        max-width: 600px;
+        margin: 20px auto 0px auto;
+    }
+  
+    @media only screen and (min-width: 1020px) {
+        .designLink {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .designLink:hover {
+            text-decoration: underline;
+            color: #B5DFE0;
+        }
+
+        .gridContainer {
+            max-width: none;
+            margin-top: 2%;
+            display: grid; 
+            grid-template-columns: 1fr 600px 1fr; 
+            grid-template-rows: auto auto auto; 
+            gap: 0px 20px; 
+        }
+        
+        .dateSub {
+            font-weight: 900;
+        }
+
+        .hideMob {
+            display: block;
+        }
+
+        .hideDesk {
+            display: none;
+        }
+
+        .paddingDeficit {
+            padding-top: 3em;
+        }
+    }
+
+    @media only screen and (min-width: 760px) and (min-height: 1020px) {
+        .hideTablet {
+            display: none;
+        }
+    }
+
+  
+/*Menu Switch*/
+    @media only screen and (min-width: 760px) {
+        .text-navWrapper {
+            display: inline;
+        }
+    }
+/*Menu Switch Close*/
+
+/*Selective Hover State for SVG*/
+.btt-btn {
+    display: block;
+    margin: 3em auto 0em auto;
+}
+
+.bttSVGpath {
+    fill: rgb(1,1,1);
+    filter: brightness(1000);
+}
+
+.bttSVGrect1 {
+    fill: rgb(1,1,1);
+    filter: brightness(1000);
+}
+
+.bttSVGrect2 {
+    fill: rgb(1,1,1);
+    filter: brightness(1000);
+}
+
+svg:active .bttSVGpath {
+    filter: invert(99%) sepia(2%) saturate(3746%) hue-rotate(115deg) brightness(91%) contrast(92%);
+}
+
+svg:active .bttSVGrect1{
+    filter: invert(99%) sepia(2%) saturate(3746%) hue-rotate(115deg) brightness(91%) contrast(92%);
+}
+
+svg:active .bttSVGrect2{
+    filter: invert(12%) sepia(97%) saturate(3265%) hue-rotate(333deg) brightness(74%) contrast(111%);
+}
+
+@media only screen and (min-width: 1020px) {
+    svg:hover .bttSVGpath {
+        filter: invert(99%) sepia(2%) saturate(3746%) hue-rotate(115deg) brightness(91%) contrast(92%);
+    }
+
+    svg:hover .bttSVGrect1{
+        filter: invert(99%) sepia(2%) saturate(3746%) hue-rotate(115deg) brightness(91%) contrast(92%);
+    }
+
+    svg:hover .bttSVGrect2{
+        filter: invert(12%) sepia(97%) saturate(3265%) hue-rotate(333deg) brightness(74%) contrast(111%);
+    }
+}
+/*/ Close Selective Hover State for SVG*/
+
+
+/*Footer Classes*/
+
+#content-wrap {
+    min-height: calc(100% - 144px); // 144px should be the height of the header + height of footer
+}
+
+/* Use only when disparity between header heights across breakpoints.
+
+@media only screen and (min-width: 760px) {
+    #content-wrap {
+        min-height: calc(100% - 144px); // 144px should be the height of your header + height of footer
+    }
+}
+*/
+
+.footer {
+    position: absolute;
+    height: 50px;
+    width: 100vw;
+    max-width: 100%;
+    bottom: 0;
+    z-index: 10;
+}
+
+.admintext {
+    position: absolute;
+    text-align: left;
+    align-self: center;
+    font-weight: 900;
+    top: 48%;
+    left: 10px;
+    margin: 0px 0px 0px 0px;
+    transition: 0.1s;
+}
+
+.admintext:hover {
+    color: #B5DFE0;
+    transition: 0.1s;
+    text-decoration: underline;
+}
+
+.icons {
+    position: absolute;
+    align-content: flex-end;
+    display: flex;
+    top: 18px;
+    right: 12px;
+}
+
+.icon {
+    fill: #ffffff;
+}
+
+.icon:hover {
+    fill: #B5DFE0;
+    transition: 0.1s;
+}
+
+
+ /*/Footer Classes*/
+
+ /*Accordian Dropdown Classes*/
+.accordion-flex {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-align-content: stretch;
+    -ms-flex-line-pack: stretch;
+    align-content: stretch;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+}
+
+.accordionFlex-item:nth-child(1) {
+    -webkit-order: 3;
+    -ms-flex-order: 3;
+    order: 3;
+    -webkit-flex: 0 1 auto;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    -webkit-align-self: auto;
+    -ms-flex-item-align: auto;
+    align-self: auto;
+}
+
+.accordionFlex-item:nth-child(2) {
+    -webkit-order: 2;
+    -ms-flex-order: 2;
+    order: 2;
+    -webkit-flex: 0 1 auto;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    -webkit-align-self: auto;
+    -ms-flex-item-align: auto;
+    align-self: auto;
+    padding-left: 30px;
+}
+
+.accordionFlex-item:nth-child(3) {
+    -webkit-order: 1;
+    -ms-flex-order: 1;
+    order: 1;
+    -webkit-flex: 0 1 auto;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    -webkit-align-self: auto;
+    -ms-flex-item-align: auto;
+    align-self: auto;
+}
+
+ .accordion {
+    color: #B5DFE0;
+    background-color: #212121;
+    cursor: pointer;
+    padding: 0em 0em 1em 0em;
+    width: 100%;
+    font-family: 'Nunito', arial, sans-serif;
+    font-size: 1em;
+    line-height: 1.4em;
+    text-align: left;
+    font-weight: 900;
+    border: none;
+    outline: none;
+    transition: 0.6s;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active {
+    padding: 0em 0em 0em 0em;
+    color: #CEC177;
+    transition: 0.1s;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+.panel {
+    padding: 0 0px;
+    background-color: #212121;
+    display: none;
+    overflow: hidden;
+    transition: 0.6s;
+}
+.panel p:last-child {
+    padding-bottom: 1.5em;
+}
+
+.dropdownArrow {
+    display: inline-block;
+    width: 12px;
+    transform: rotate(90deg);
+    transition: 0.6s;
+}
+
+.activeArrow span {
+    transform: rotate(180deg);
+    transition: 0.6s;
+}
+
+.activeArrow span svg path {
+    fill: #CEC177;
+    transition: 0.1s;
+}
+
+@media only screen and (min-width: 1020px) {
+    .active, .accordion:hover {
+        color: #CEC177;
+        transition: 0.1s;
+    }
+
+    .active, .accordion:hover span svg path{
+        fill: #CEC177;
+        transition: 0.1s;
+    }
+}
+
+@media only screen and (min-width: 760px) {
+    .accordionFlex-item:nth-child(1) {
+        -webkit-order: 1;
+        -ms-flex-order: 1;
+        order: 1;
+    }
+    
+    .accordionFlex-item:nth-child(2) {
+        -webkit-order: 2;
+        -ms-flex-order: 2;
+        order: 2;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    
+    .accordionFlex-item:nth-child(3) {
+        -webkit-order: 3;
+        -ms-flex-order: 3;
+        order: 3;
+    }
+
+    .panel p:last-child {
+        padding-bottom: 0em;
+    }
+}
+/*Accordian Dropdown close*/
+
+.textMenuCurrentPage {
+    color: #CEC177;
+}
+
+@media only screen and (min-width: 760px) {
+    .textMenuCurrentPage {
+        color: #CEC177;
+        font-weight: 900;
+        text-decoration: underline;
+    }
+}
+
+.socialIcon {
+    display: block;
+    position: relative;
+    margin: 1em 1em 0em 0em;
+    float: left;
+}
+
+.socialIconSVGPath {
+    fill: #fff;
+}
+
+.socialIconSVGPath:hover {
+    fill: #B5DFE0;
+}
