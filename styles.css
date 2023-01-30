@@ -746,3 +746,7 @@ svg:active .bttSVGrect2{
 .socialIconSVGPath:hover {
     fill: #B5DFE0;
 }
+
+body {
+    -webkit-tap-highlight-color: rgba(1, 1, 1, 0);
+}
