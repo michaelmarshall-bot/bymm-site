@@ -570,7 +570,7 @@ svg:active .bttSVGrect2{
 
  /*/Footer Classes*/
 
- /*Accordian Dropdown Classes*/
+ /*Accordion Dropdown Classes*/
 .accordion-flex {
     display: -ms-flexbox;
     display: -webkit-flex;
@@ -631,7 +631,7 @@ svg:active .bttSVGrect2{
 
  .accordion {
     color: #B5DFE0;
-    background-color: #212121;
+    background-color: #21212100;
     cursor: pointer;
     padding: 0em 0em 1em 0em;
     width: 100%;
@@ -655,7 +655,7 @@ svg:active .bttSVGrect2{
 /* Style the accordion panel. Note: hidden by default */
 .panel {
     padding: 0 0px;
-    background-color: #212121;
+    background-color: #21212100;
     display: none;
     overflow: hidden;
     transition: 0.6s;
