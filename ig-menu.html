@@ -1,0 +1,129 @@
+<!DOCTYPE html lang="eng">
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="bymichaelmarshall" content="Design & Writing by Michael Marshall">
+    <meta name="canada,user experience,ux,user interface,ui,publishing,media,portfolio,contractor,design,writing,music,writer,designer,musician,typesetting,web design,michael,marshall,michael marshall" content="HTML, CSS, JavaScript">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Google/Android Favicon Meta-->
+    <meta name="theme-color" content="#212121">
+    <!--Standard Favicon-->
+    <link rel="icon" href="favicon/bymmfavicon.png" type="image/svg+xml">
+     <!--iOS Favicons-->
+     <link rel="apple-touch-icon" href="favicon/iOS-touch-icon.png">
+     <!--Google/Android Favicon-->
+     <link rel="manifest" href="manifest.json">
+    <title>By MM</title>
+    <!--Styles-->
+    <link rel="stylesheet" href="styles.css">
+    <!--Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,900;1,400;1,900&display=swap" rel="stylesheet">
+    <style>
+        
+    .dividerLP {
+        display: none;
+        margin: 8% 0px 8% 0px;
+        border: none;
+        height: 3px;
+        border-radius: 5px;
+        background-color: #7e7e7e;
+    }
+
+    .landingNav {
+        text-align: center;
+    }
+
+    .landNavItem {
+        font-weight: 900;
+    }
+
+    #bodyContent {
+        padding-top: 85%;
+    }
+
+    .igmenuhed {
+        font-weight: 900;
+    }
+
+    .igmenuLink {
+        transition: 1s;
+        text-decoration: none;
+        color: #ffffff;
+        padding: 10px;
+        border: solid 3px #ffffff;
+        border-radius: 6px;
+    }
+
+    .igmenuLink:hover {
+        transition: 1s;
+        text-decoration: none;
+        background: #B5DFE0;
+        color: #212121;
+        border: solid 3px #B5DFE0;
+    }
+
+    .footer {
+        opacity: 0;
+        animation: footerFadeIn 3s forwards;
+        animation-delay: 1.5s;
+    }
+
+    @keyframes footerFadeIn {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+         }
+    }
+
+    @media only screen and (min-width:760px) {
+
+    #bodyContent {
+        position: absolute;
+        top: 32%;
+        left: 24%;
+        padding: 0px 0px 0px 0px;
+        margin: 0px;
+        min-width: 350px;
+    }
+    }
+    </style>
+</head>
+<body id="body">
+    <div class="navBar">
+    </div>
+<!--Body Content-->
+<div id="bodyContent">
+    <div class="landingNav">
+        <p class="igmenuhed">@bymichaelsmarshall</p>
+        <hr class="dividerLP">
+        <a href="https://design.bymichaelmarshall.com/contact">
+            <p class="igmenuLink LandNavItem">Contact</p>
+        </a>
+        <a href="https://bymichaelmarshall.darkroom.com/">
+            <p class="igmenuLink LandNavItem">Prints</p>
+        </a>
+        <a href="https://design.bymichaelmarshall.com">
+            <p class="igmenuLink LandNavItem">Site</p>
+        </a>
+    </div>
+</div>
+<!--/Body Content-->
+    <footer class="footer">
+        <a href="terms">
+            <p class="admintext">©<span id="currentYear">2021</span>
+            </p>
+        </a>
+        <div class="icons">
+            <a href="https://design.bymichaelmarshall.com/contact">
+                <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 12.713l-11.985-9.713h23.97l-11.985 9.713zm0 2.574l-12-9.725v15.438h24v-15.438l-12 9.725z"/></svg>
+            </a>
+        </div>
+    </footer> 
+</body>
+<!--JS-->
+<script src="script.js"></script>
+</html>
