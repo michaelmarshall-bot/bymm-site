@@ -5,7 +5,7 @@
         "src": "favicon/android-chrome-manifest.png",
         "sizes": "192x192"
     }],
-    "background_color": "#ffffff",
-    "theme_color": "#ffffff",
+    "background_color": "#fffff0",
+    "theme_color": "#fffff0",
     "display": "fullscreen"
 }

@@ -2,11 +2,12 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="bymichaelmarshall" content="Design & Writing by Michael Marshall">
-    <meta name="canada,user experience,ux,user interface,ui,publishing,media,portfolio,contractor,design,writing,music,writer,designer,musician,typesetting,web design,michael,marshall,michael marshall" content="HTML, CSS, JavaScript">
+    <meta name="title" content="Mike Marshall">
+    <meta name="description" content="Mike Marshall is a writer, editor, and book designer. His credits include fiction, plays, magazines, and prize winning creative nonfiction.">
+    <meta name="keywords" content="canada,publishing,media,portfolio,book design,writing,writer,editor,book designer,typesetting,michael,marshall,mike marshall,editing,">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Google/Android Favicon Meta-->
-    <meta name="theme-color" content="#212121">
+    <meta name="theme-color" content="#fffff0">
     <!--Standard Favicon-->
     <link rel="icon" href="favicon/bymmfavicon.png" type="image/svg+xml">
      <!--iOS Favicons-->
@@ -19,90 +20,204 @@
     <!--Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,900;1,400;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Pirata+One&display=swap" rel="stylesheet">
     <style>
-
-    .dividerLP {
-        display: none;
-        margin: 8% 0px 8% 0px;
-        border: none;
-        height: 3px;
-        border-radius: 5px;
-        background-color: #7e7e7e;
-    }
-
-    .designLink {
-        text-decoration: underline;
-        color: #B5DFE0;
-    }
-
-    .designLink:hover {
-        text-decoration: underline;
-        color: #CEC177;
-    }
-
-    .landingNav {
-        text-align: center;
-    }
-
-    .landNavItem {
-        font-weight: 900;
-    }
-
-    #bodyContent {
-        padding-top: 85%;
-    }
-
-    .footer {
-        opacity: 0;
-        animation: footerFadeIn 3s forwards;
-        animation-delay: 1.5s;
-    }
-
-    @keyframes footerFadeIn {
-        0% {
-            opacity: 0;
+        #bodyContent {
+            padding-top: 150px;
         }
-        100% {
-            opacity: 1;
-         }
-    }
 
-    @media only screen and (min-width:760px) {
+        h1 {
+            margin-block-end: 0em;
+            padding-top: 1.5em;
+            font-size: 6em;
+        }
 
-    #bodyContent {
-        position: absolute;
-        top: 42%;
-        left: 46%;
-        padding: 0px 0px 0px 0px;
-        margin: 0px;
-    }
-    }
+        #headParagraph {
+            margin-block-start: 0em;
+        }
+
+        .footnote {
+            font-size: 1em;
+            line-height: 1.3em;
+        }
+
+        #footnote1 {
+            display: none;
+        }
+
+        .footnote-divider {
+            width: 45px;
+            height: 2.5px;
+            color: #800200;
+            background-color: #800200;
+            text-align: left;
+            margin: 1em 0em 1em 0em;
+        }
+
+        #publications1 {
+            display: none;
+        }
+
+        #publications2 {
+            display: block;
+        }
+
+        .publications h2 {
+            padding: 0em;
+        }
+
+        .publications p {
+            display: block;
+            max-width: 300px;
+            margin-block-end: 0.5em;
+        }
+
+
+        @media only screen and (max-width: 552px) {
+            h1 {
+                font-size: 18vw;
+            }
+        }
+
+        @media only screen and (min-width: 1440px) {
+
+            
+            #footnote1 {
+                display: block;
+                max-width: 300px;
+                margin: 0em 6em 0em auto;
+            }
+
+            #footnote2 {
+                display: none;
+            }
+
+            .footnote-divider {
+        
+                margin-top: 0.4em; /*matches column line height*/
+            }
+
+            .publications {
+                display: block;
+                max-width: 300px;
+                margin: 0em auto 0em 6em;
+            }
+
+            .publications h2 {
+                padding: 0em;
+                margin-block-start: 0em;
+            }
+
+            #publications1 {
+                display: block;
+            }
+
+            #publications2 {
+                display: none;
+            }
+
+        }
+
     </style>
 </head>
 <body id="body">
     <div class="navBar">
+        <header>
+        </header>
+        <!-- Nav -->
+        <nav>
+            <div class="navWrapper">
+                <div class="nav">
+                <input id="checkbox" type="checkbox"/>
+                    <span></span>
+                    <span></span>
+                    <div class="menu">
+                        <li class="textMenuCurrentPage">About &larr;</li>
+                        <li><a href="contact">Contact</a></li>
+                        <hr id="menu-foot">
+                    </div>
+                </div>
+            </div>
+            <div class="text-navWrapper">
+                <div class="text-nav">
+                    <div class="textMenu">
+                        <li class="textMenuCurrentPage">About</li>
+                        <li><a href="contact">Contact</a></li>
+                    </div>
+                </div>
+            </div>
+        </nav>
     </div>
 <!--Body Content-->
 <div id="bodyContent">
-    <div class="landingNav">
-        <a href="https://design.bymichaelmarshall.com">
-            <p class="designLink LandNavItem">Design</p>
-        </a>
-        <hr class="dividerLP">
-        <p>by</p>
-        <p>Michael Marshall</p>
+    <div class="gridContainer">
+        <div class="gridHeader">
+        </div>
+        <div class="gridBody">
+            <h1 class="paddingDeficit">Mike Marshall</h1>
+            <p id="headParagraph">is a writer, editor, and book designer. He has edited prize winning and long listed memoir and creative nonfiction<sup>1</sup>; written copy and designed for literary magazines and award winning legacy titles<sup>2</sup>; and published short fiction in both English and Scots.
+        </div>
+        <div class="gridMargin">
+        </div>
+        <div class="gridHeader">
+            <div id="footnote1">
+                <hr class="footnote-divider">
+                <p class="footnote">1. <i>EVENT Magazine</i>, <i>PRISM International</i>, CBC Nonfiction Prize, <i>The New York Times</i>, <i>Eavesdrop Magazine</i>.</p>
+                <p class="footnote">2. <i>Canadian Business</i>,  <i>Chatelaine</i>, <i>FASHION</i>, <i>FLARE</i>, <i>Maclean’s</i>, <i>MinK</i>,  <i>Raconteur Literary Magazine</i>, <i>TEACH Magazine</i>.</p>
+            </div>
+        </div>
+        <div class="gridBody">
+            <p>He was also a finalist in NYC Midnight’s 2018 Short Story Competition and award-winning cannon fodder in Toronto as a playwright. He holds an MSc in Creative Writing from the University of Edinburgh and a GradCert in Publishing from Centennial College.</p>
+                
+            <p>Originally from the UK, he now lives in the Ottawa Valley where he hosts workshops, moderates author events, and learns as much as teaches.</p>
+        </div>
+        <div class="gridMargin">
+            <div class="publications" id="publications1">
+                <h2>Publications</h2>
+                <p>&ldquo;Tasmanian Devil.&rdquo;<i>Lallans</i>, 93. (Yuil, 2018)</p>
+                <p><i>The Peculiar</i>. &ldquo;For X&rdquo;. (2017)</p>
+                <p>&ldquo;Three Aisles.&rdquo;<i>From Arthur's Seat</i>, Vol. II (2017)</p>
+                <p><i>The Peculiar</i>. &ldquo;The Peculiar&rdquo;. (2015)</p>
+                <p>&ldquo;The Irish, Hysteria, & Guy Fawkes: The Fenian Demonstration of Guy Fawkes Night 1864 and Upper Canada.&rdquo; <i>Garm Lu</i>. (2015)</p>
+            </div>
+        </div>
+        <div class="gridHeader">
+        </div>
+        <div class="gridBody">
+             <div id="footnote2">
+                <hr class="footnote-divider">
+                <p class="footnote">1. <i>EVENT Magazine</i>, <i>PRISM International</i>, CBC Nonfiction Prize, <i>The New York Times</i>, <i>Eavesdrop Magazine</i>.</p>
+                <p class="footnote">2. <i>Canadian Business</i>,  <i>Chatelaine</i>, <i>FASHION</i>, <i>FLARE</i>, <i>Maclean’s</i>, <i>MinK</i>,  <i>Raconteur Literary Magazine</i>, <i>TEACH Magazine</i>.</p>
+            </div>
+        </div>
+        <div class="gridMargin">
+        </div>
+        <div class="gridHeader">
+        </div>
+        <div class="gridBody">
+            <div class="publications" id="publications2">
+                <h2>Publications</h2>
+                <p>&ldquo;Tasmanian Devil.&rdquo;<i>Lallans</i>, 93. (Yuil, 2018)</p>
+                <p><i>The Peculiar</i>. &ldquo;For X&rdquo;. (2017)</p>
+                <p>&ldquo;Three Aisles.&rdquo;<i>From Arthur's Seat</i>, Vol. II (2017)</p>
+                <p><i>The Peculiar</i>. &ldquo;The Peculiar&rdquo;. (2015)</p>
+                <p>&ldquo;The Irish, Hysteria, & Guy Fawkes: The Fenian Demonstration of Guy Fawkes Night 1864 and Upper Canada.&rdquo; <i>Garm Lu</i>. (2015)</p>
+            </div>
+        </div>
+        <div class="gridMargin">
+            
+        </div>
     </div>
 </div>
 <!--/Body Content-->
     <footer class="footer">
         <a href="terms">
-            <p class="admintext">©<span id="currentYear">2021</span>
-            </p>
+            <p class="admintext">©2021-<span id="currentYear">2021</span>
+            <a href="terms"> | Terms</a></p>
         </a>
         <div class="icons">
-            <a href="https://design.bymichaelmarshall.com/contact">
-                <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 12.713l-11.985-9.713h23.97l-11.985 9.713zm0 2.574l-12-9.725v15.438h24v-15.438l-12 9.725z"/></svg>
+            <a href="contact">
+                <p class="admintext admintext-right">Contact</p>
             </a>
         </div>
     </footer> 
