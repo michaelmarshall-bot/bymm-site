@@ -1,0 +1,501 @@
+<!DOCTYPE html lang="eng">
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="title" content="Contact">
+    <meta name="description" content="Mike Marshall is a writer, editor, and book designer. His credits include fiction, plays, magazines, and prize winning creative nonfiction.">
+    <meta name="keywords" content="canada,publishing,media,portfolio,book design,writing,writer,editor,book designer,typesetting,michael,marshall,mike marshall,editing,">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Google/Android Favicon Meta-->
+    <meta name="theme-color" content="#fffff0">
+    <!--Standard Favicon-->
+    <link rel="icon" href="favicon/bymmfavicon.png" type="image/svg+xml">
+     <!--iOS Favicons-->
+     <link rel="apple-touch-icon" href="favicon/iOS-touch-icon.png">
+     <!--Google/Android Favicon-->
+     <link rel="manifest" href="manifest.json">
+    <title>Contact | By MM</title>
+    <!--Styles-->
+    <link rel="stylesheet" href="styles.css">
+    <!--Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Pirata+One&display=swap" rel="stylesheet">
+    <style>
+
+/* Tape Build*/
+:root {
+  --pink: #faeace;
+  --pink-dark: #b9ad96;
+  --tape-gray: #dbd8be;
+  --tape-edge-gray: #b7b49d;
+  --transparent: rgba(255, 255, 255, 0);
+}
+
+/*body {
+  background: #ebf4e9;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}*/
+
+.blue {
+  --paper-color: #fffff0;
+  --paper-dark: #d7d7c993;
+  --shadow-size: 3px;
+  --transparent: rgba(213, 224, 249, 0);
+}
+
+.pink {
+  --paper-color: #fffff0;
+  --paper-dark: #cbcbbf24;
+  --shadow-size: 1px;
+  --transparent: rgba(236, 178, 186, 0);
+}
+
+.yellow {
+  --paper-color: #fffff0;
+  --paper-dark: #cbcbbf5b;
+  --shadow-size: 3px;
+  --transparent: rgba(213, 224, 249, 0);
+}
+
+.paper {
+  position: relative;
+  background: linear-gradient(
+      to bottom right,
+      var(--paper-dark),
+      20%,
+      var(--transparent)
+    ),
+    var(--paper-color);
+    min-width: 145px;
+    min-height: 130px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Caveat", cursive;
+    font-size: 2rem;
+    box-shadow: var(--shadow-size) var(--shadow-size) 2px var(--paper-dark);
+    margin: auto;
+    margin-top: 50px;
+}
+
+.paper::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+      var(--transparent),
+      50%,
+      var(--paper-dark),
+      51%,
+      var(--transparent)
+    ),
+    linear-gradient(
+      to right,
+      var(--transparent),
+      50%,
+      var(--paper-dark),
+      51%,
+      var(--transparent)
+    );
+}
+
+.paper1 {
+  position: relative;
+  background: linear-gradient(
+      to bottom right,
+      var(--paper-dark),
+      20%,
+      var(--transparent)
+    ),
+    var(--paper-color);
+    min-width: 20px;
+    min-height: 130px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Caveat", cursive;
+    font-size: 2rem;
+    box-shadow: var(--shadow-size) var(--shadow-size) 2px var(--paper-dark);
+    margin: auto;
+    margin-top: 50px;
+}
+
+.paper1::after {
+  content: "";
+  position: absolute;
+  width: 350px;
+  height: 100%;
+  background: linear-gradient(
+      var(--transparent),
+      50%,
+      var(--paper-dark),
+      20%,
+      var(--transparent)
+    ),
+    linear-gradient(
+      to right,
+      var(--transparent),
+      90%,
+      var(--paper-dark),
+      100%,
+      var(--transparent)
+    );
+}
+
+.paper2 {
+  position: relative;
+  background: linear-gradient(
+      to bottom right,
+      var(--paper-dark),
+      20%,
+      var(--transparent)
+    ),
+    var(--paper-color);
+    min-width: 20px;
+    min-height: 130px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Caveat", cursive;
+    font-size: 2rem;
+    box-shadow: var(--shadow-size) var(--shadow-size) 2px var(--paper-dark);
+    margin: auto;
+    margin-top: 50px;
+}
+
+.paper2::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+      var(--transparent),
+      90%,
+      var(--paper-dark),
+      10%,
+      var(--transparent)
+    ),
+    linear-gradient(
+      to right,
+      var(--transparent),
+      5%,
+      var(--paper-dark),
+      30%,
+      var(--transparent)
+    );
+}
+
+.tape-section {
+  position: absolute;
+  width: 100%;
+}
+
+.top-tape {
+  position: absolute;
+  /*height: 4vmin;*/
+  height: 40px;
+  top: -10px;
+  width: 110%;
+  background-color: var(--tape-gray);
+  border-right: 1px dotted var(--tape-edge-gray);
+  border-left: 1px dotted var(--tape-edge-gray);
+  opacity: 0.5;
+}
+
+.tape-section:first-of-type {
+  top: 0;
+}
+
+.tape-section:last-of-type {
+  bottom: 0;
+}
+
+.tape-section::before,
+.tape-section::after {
+  content: "";
+  width: 70%;
+  height: 40px;
+  position: absolute;
+  background-color: var(--tape-gray);
+  opacity: 0.5;
+  border-right: 1px dotted var(--tape-edge-gray);
+  border-left: 1px dotted var(--tape-edge-gray);
+}
+
+.tape-section:last-of-type::after {
+  transform: rotate(-44.7deg);
+  right: -4vmin;
+  top: -3vmin;
+  width: 75%;
+}
+
+.tape-section:first-of-type::before {
+  transform: rotate(-46.5deg);
+  left: -4vmin;
+  width: 71%;
+}
+
+.tape-section:first-of-type::after {
+  transform: rotate(45deg);
+  right: -4vmin;
+  top: 0;
+  width: 65%;
+}
+
+.tape-section:last-of-type::before {
+  transform: rotate(46deg);
+  left: -4vmin;
+  bottom: 0;
+  width: 68%;
+}
+
+#bodyContent {
+            padding-top: 150px;
+        }
+
+        .textMenuCurrentPage {
+            text-decoration: none;
+            color: #800200;
+        }
+
+        h1 {
+            margin-block-end: 0em;
+            padding-top: 1.5em;
+            font-size: 6em;
+        }
+
+        .contactLinks a {
+            color: #800200;
+            text-decoration: underline;
+        }
+
+       
+        /*Profile Picture*/
+        #profilePic {
+            width: 350px;
+           /* border: solid;
+            border-color: #000000;
+            border-bottom: 10px;*/
+        }
+
+        #paper1Container {
+            padding-top: 3.8em;
+            display: flex;
+            transform: rotate(-0.2deg);
+            margin-left: -100px; /*Allows Profile Picture overlap on tablet breakpoints*/
+        }
+
+        .paper1 {
+            margin: 50px 2em auto auto;
+         }
+
+         .paper1 .top-tape {
+            transform: rotate(-0.3deg);
+        }
+
+        /*Secondary Image 1*/
+
+         #secondaryImg1 {
+            max-width: 145px;
+            width: 100%;
+        }
+
+        #paperContainer {
+            display: flex;
+            transform: rotate(-0.1deg);
+        }
+        
+        .paper {
+            max-width: 145px;
+            margin: -218px auto auto 100px;
+        }
+
+        .tape-section:first-of-type::before {
+                left: -52px;
+                top: -10px;
+            }
+
+            .tape-section:first-of-type::after {
+                right: -46px;
+                top: -9px;
+            }
+
+            .tape-section:last-of-type::before {
+                left: -45px;
+                bottom: -20px;
+                transform: rotate(41deg);
+            }
+
+            .tape-section:last-of-type::after {
+                right: -40px;
+                top: -16px;
+                transform: rotate(-31.7deg);
+            }
+
+        /*Secondary Image 2*/
+
+        #secondaryImg2 {
+            max-width: 500px;
+        }
+
+        #paper2Container {
+            display: flex;
+            transform: rotate(0.5deg);
+        }
+
+        .paper2 {
+            margin: 75px auto auto -255px;
+            max-width: 500px;
+        }
+
+        .paper2 .top-tape {
+            transform: rotate(0.5deg);
+        }
+
+        @media only screen and (max-width: 1020px) {
+
+            #bodyContent {
+                padding-top: 0.2em;
+            }
+
+            .paddingDeficit {
+                padding-top: 0.2em;
+                margin-block-start: 0.2em;
+            }
+
+            /*Profile Image*/
+
+            #paper1Container {
+                padding-top: 0em;
+                margin-left: auto; /*Removes tablet breakpoints overlap from mobile*/
+            }
+
+            .paper1 {
+                margin: 50px auto auto auto;
+        
+            }
+
+            /*Secondary Image 1*/
+
+            #paperContainer {
+                margin-top: 5em;
+            }
+        
+            .paper {
+                max-width: 145px;
+                margin: auto;
+            }
+
+            /*Secondary Image 2*/
+
+            #paper2Container {
+                margin-top: 5em;
+        
+            }
+
+            .paper2 {
+                margin: auto;
+                width: 500px;
+            }
+        }
+
+    </style>
+</head>
+<body id="body">
+    <div class="navBar">
+        <header>
+        </header>
+        <!-- Nav -->
+        <nav>
+            <div class="navWrapper">
+                <div class="nav">
+                <input id="checkbox" type="checkbox"/>
+                    <span></span>
+                    <span></span>
+                    <div class="menu">
+                        <li><a href="index">About</a></li>
+                        <li class="textMenuCurrentPage">Contact &larr;</li>
+                        <hr id="menu-foot">
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="text-navWrapper">
+                <div class="text-nav">
+                    <div class="textMenu">
+                        <li><a href="index">About</a></li>
+                        <li class="textMenuCurrentPage">Contact</li>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+<!--Body Content-->
+<div id="bodyContent">
+    <div class="gridContainer">
+        <div class="gridHeader">
+            <div id="paper1Container">
+                <div class="paper1 blue">
+                    <div class="top-tape"></div>
+                    <img id="profilePic" src="assets/DSC_0083 BW Small Square.jpg" alt="Black and white photo of a blonde man in a black jacket and sunglasses."/>
+                </div>
+            </div>
+        </div>
+        <div class="gridBody">
+            <h1 class="paddingDeficit">Contact</h1>
+            <div class="contactLinks">
+                <p style="max-width: 400px;">To find out more about my work and my services send me an email at:</p>
+                <p><a href="mailto:getintouch@bymichaelmarshall.com">getintouch@bymichaelmarshall.com</a></p>
+                <p>or find me on <a href="https://substack.com/@bymichaelsmarshall">Substack</a> and <a href="https://www.instagram.com/bymichaelsmarshall">Instagram</a>.</p>
+            </div>
+        </div>
+        <div class="gridMargin">
+        </div>
+        <div class="gridHeader">
+        </div>
+        <div class="gridBody">
+        </div>
+        <div class="gridMargin">
+            <div id="paperContainer">
+                <div class="paper pink">
+                    <img id="secondaryImg1" src="assets/IMG_4666small.jpg" alt="Black and white portrait of a man with short hair"/>
+                    <div class="tape-section"></div>
+                    <div class="tape-section"></div>
+                </div>
+            </div>
+        </div>
+        <div class="gridHeader">
+        </div>
+        <div class="gridBody">
+        </div>
+        <div class="gridMargin">
+            <div id="paper2Container">
+                <div class="paper2 yellow">
+                    <div class="top-tape"></div>
+                    <img id ="secondaryImg2" src="assets/2015-05-29 15.01.09cropped-UVburn.jpg" alt="A man playing a bass guitar wearing a sleevless shirt."/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/Body Content-->
+    <footer class="footer">
+        <a href="terms">
+            <p class="admintext">©2021-<span id="currentYear">2021</span>
+            | <a href="terms">Terms</a></p>
+        </a>
+        <div class="icons">
+            <a href="https://bymichaelmarshall.com/contact">
+                <p class="admintext admintext-right">Contact</p>
+            </a>
+        </div>
+    </footer> 
+</body>
+<!--JS-->
+<script src="script.js"></script>
+</html>
