@@ -637,8 +637,8 @@ a {
   animation: rgbText 2s steps(9) 0s infinite alternate;
 }
 
-button:hover .ink-label {
- animation: none;
+.ink-label + button:hover {
+ animation-fill-mode: var(hsl(from var(--accent-color) h s l / 0));
 }
 
 @keyframes ink-in {
