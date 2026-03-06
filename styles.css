@@ -613,7 +613,6 @@ a {
   mask-size: 2300% 100%;
   -webkit-mask: url("/assets/animation/nature-sprite.png");
   -webkit-mask-size: 2300% 100%;
-  background-color: hsl(from var(--accent-color) h s l / 0.2);
   background-blend-mode: multiply;
   border: none;
   color: #000;
@@ -636,6 +635,10 @@ a {
   transform: translateY(-50%);
   pointer-events: none;
   animation: rgbText 2s steps(9) 0s infinite alternate;
+}
+
+button:hover .ink-label {
+ animation: none;
 }
 
 @keyframes ink-in {
