@@ -271,7 +271,7 @@ a {
   line-height: 78px;
   font-size: 20px;
   font-family: 'Krona One', sans-serif;
-  background: linear-gradient(45deg, transparent 5%, color(from var(--primary-color) / 0) 5%);
+  background: linear-gradient(45deg, transparent 5%, color(from var(--accent-color) / 0) 5%);
   border: 0;
   color: #fff;
   letter-spacing: 3px;
@@ -299,21 +299,21 @@ a {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(45deg, transparent 3%, var(--secondary-color) 3%, var(--secondary-color) 5%, var(--primary-color) 5%);
-  text-shadow: -3px -3px 0px var(--accent-color), 3px 3px 0px var(--secondary-color);
+  background: linear-gradient(45deg, transparent 3%, var(--secondary-color) 3%, var(--secondary-color) 5%, var(--accent-color) 5%);
+  text-shadow: -3px -3px 0px var(--primary-color), 3px 3px 0px var(--secondary-color);
   clip-path: var(--slice-0);
   cursor: pointer;
 }
 
 .design-btn:hover {
-    background: linear-gradient(45deg, transparent 5%, color(from var(--primary-color) / 1) 5%);
+    background: linear-gradient(45deg, transparent 5%, color(from var(--accent-color) / 1) 5%);
     box-shadow: 6px 0px 0px color(from var(--secondary-color) / 1);
 }
 
 .design-btn:hover:after {
   animation: 1s glitch;
   animation-timing-function: steps(2, end);
-  background: linear-gradient(45deg, transparent 5%, var(--primary-color) 5%);
+  background: linear-gradient(45deg, transparent 5%, var(--accent-color) 5%);
   border: 0;
   color: #fff;
   letter-spacing: 3px;
