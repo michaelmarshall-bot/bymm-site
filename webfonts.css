@@ -9,7 +9,7 @@
 @font-face {
   font-family: "Estrella-Early";
   font-weight: 400;
-  src: url("https://github.com/michaelmarshall-bot/bymm-site/blob/4094d463798394363ea573fcd6ebece5f2b9f81b/assets/typefaces/Estrella-Early.woff2") format("woff2"), url("https://github.com/michaelmarshall-bot/bymm-site/blob/4094d463798394363ea573fcd6ebece5f2b9f81b/assets/typefaces/Estrella-Early.woff") format("woff");
+  src: url("/assets/typefaces/Estrella-Early.woff2") format("woff2"), url("/assets/typefaces/Estrella-Early.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
