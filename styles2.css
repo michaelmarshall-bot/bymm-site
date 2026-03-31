@@ -77,7 +77,7 @@
 
 /* --- SCROLLBARS & BASE --- */
 html, body {
-    scrollbar-width: none; -ms-overflow-style: none; overflow-x: hidden;
+    scrollbar-width: none; -ms-overflow-style: none; overflow-x: clip;
     background-color: var(--bg-main);
     font: var(--font-body);
     font-optical-sizing: auto;

@@ -208,7 +208,7 @@ testimonialWrappers.forEach((wrapper) => {
 
 
     //Design Page Hero Flicker Logic
-    const hero = document.querySelector('.hero-section');
+    const hero = document.querySelectorAll('.hero-title, .floating-logo');
 
     function triggerRandomFlicker() {
         // 1. Generate random delay between 12,000ms and 18,000ms
@@ -216,12 +216,11 @@ testimonialWrappers.forEach((wrapper) => {
 
         setTimeout(() => {
             // 2. Start the flicker
-            hero.classList.add('is-flickering');
+            hero.forEach(el => el.classList.add('is-flickering'));
 
             // 3. Stop it after 1 second
             setTimeout(() => {
-                hero.classList.remove('is-flickering');
-                // 4. Repeat the cycle
+                hero.forEach(el => el.classList.remove('is-flickering'));
                 triggerRandomFlicker();
             }, 1000); 
 
