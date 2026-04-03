@@ -23,7 +23,7 @@
         /*Type Padding*/
     --h1-pad: calc((var(--type-ratio) * ((1.618) * 5)) * 1rem) 0px 0px 0px;
     --h2-pad: calc((var(--type-ratio) * ((1.618) * 2)) * 1em) 0px 2px 5px;
-    --p-padding: calc((var(--type-ratio)) * 1em) 20px 5px 8px;
+    --p-padding: calc((var(--type-ratio)) * 1em) 8px 5px 8px;
     --type-align: left;
 
     /* PALETTE & EFFECTS */
@@ -418,6 +418,7 @@ background-color: var(--hed-colour);
 
 .work-item {
     border: 1px solid var(--lcd-glow-color);
+    background-color: var(--bg-main);
     box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.5); 
     padding: 1.5rem 2rem;
     width: 90%; 
@@ -670,3 +671,26 @@ a {
         border-radius: 0px;
     } 
 }
+
+        .hero-anim {
+            animation: 
+                glitchLoad 6s ease-in-out none 1;
+        }
+
+        .hero-anim.is-flickering {
+            animation: glitchRepeat 1s linear infinite !important;
+        }
+
+/*Hero Glitch Animation*/
+
+        @keyframes glitchLoad {
+        50% {
+            -webkit-filter: url(#glitchHover); 
+            filter: url(#glitchHover);
+        }
+        }
+        
+        @keyframes glitchRepeat {
+            0%, 100% { filter: none; }
+            50% { filter: url(#glitchHover); }
+        }

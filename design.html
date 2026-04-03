@@ -78,9 +78,10 @@
             width: 100%;
             height: 100%;
             min-height: 100vh;
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 100vh, var(--bg-main) 20%, var(--bg-main) 100%);
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 100vh, var(--bg-main) 25%, var(--bg-main) 100%);
             z-index: 9;
             pointer-events: none;
+            filter: url(#pixelNoise);
         }
 
         .hero-title > span {
@@ -149,11 +150,13 @@
             background: none;
             border: none;
             margin: 0rem 0;
+            flex-wrap: wrap;
         }
 
         .testimonial-section {
             margin-top: 140vh;
             padding: 10px 0;
+            margin-bottom: 25vh;
         }
 
 
@@ -181,14 +184,13 @@
              background-size: auto calc(100% - 20px);
             color: var(--hed-colour);
             border: solid 2px var(--hed-colour);
-            box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.5);
             padding: 60% 0.2rem 0.2rem 0.2rem;
             text-align: center;
             align-self: center;
             margin: var(--block-margin);
             max-width: 600px;
             width: 90vw;
-            display: flex;
+            display: none;
             white-space: nowrap;
             text-wrap: nowrap;
             -webkit-touch-callout: none; /* iOS Safari */
@@ -333,6 +335,10 @@
             .testimonial-wrapper:nth-child(even) .slideArrow.prev {
                 left: calc(95% - 10px);
             }
+
+            .mockTitle h2 {
+                display: flex;
+            }
         }
 
         .testimonial-section .card > :nth-child(even) {
@@ -418,70 +424,131 @@
             margin: 0px 0px -0.4em -0.1em;
         }
 
+        .imgCaption > p > span:empty::after {
+            content: "\2014";
+            font: var(--font-body);
+        }
+
+                /*Design Context Block*/
+
+        .contextBlock {
+            flex-basis: 100%;
+            margin: auto;
+        }
+
+        .contextCard {
+            flex-wrap: wrap;
+            display: flex;
+            align-items: end;
+            background: var(--bg-main);
+            margin: auto;
+            border: var(--border-std);
+        }
+
+        .contextCard h2 {
+            font: var(--h2-styles);
+            padding: var(--h2-pad);
+            text-align: var(--type-align);
+            letter-spacing: var(--hed-letterspace);
+            line-height: var(--hero-lineheight);
+        }
+
+        .contextCard p {
+            max-width: 550px;
+            padding: var(--p-padding);
+            align-self: center;
+            margin: auto;
+        }
+
+        @media screen and (min-width: 550px) {
+            .contextCard {max-width: 90vw;}
+        }
+
     </style>
 </head>
 <body>
     <!--<div class="dust-overlay" id="dust"></div>-->
     <div class="dust-overlay"></div>
     <div class="scanlines"></div>
-    <!--Pixelation Filter-->
-    <svg xmlns="http://www.w3.org/2000/svg" style="position: absolute; width: 0; height: 0; overflow: hidden;" viewBox="0 0 340 120">
-        <defs>
-            <filter id="glitchHover" primitiveUnits="objectBoundingBox" x="-10%" y="0%" width="120%" height="100%">
-            <feColorMatrix in="SourceGraphic" result="red" type="matrix" values="1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0"/> 
-            <feColorMatrix in="SourceGraphic" result="green" type="matrix" values="0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0"/> 
-            <feColorMatrix in="SourceGraphic" result="blue" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0"/> 
-            <feOffset in="red" result="red-shifted" dx="-0.01" dy="0">
-                <animate attributeName="dx" keyTimes="0;0.2257;0.2354;0.2757;0.3492;0.5235;0.8075;1" values="0.0107;0.0237;0.0177;0.0275;0.0219;0.0035;0.0228;0.0107" begin="0" dur="8.7s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
-                <animate attributeName="dy" keyTimes="0;0.2257;0.2354;0.2757;0.3492;0.5235;0.8075;1" values="0.0107;0.0237;0.0177;0.0275;0.0219;0.0035;0.0228;0.0107" begin="0" dur="8.7s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
-            </feOffset>
-            <feOffset in="blue" result="blue-shifted" dx="0.01" dy="0">
-                <animate attributeName="dx" keyTimes="0;0.2647;0.5423;0.5841;0.5883;0.7501;0.8890;1" values="0.0184;0.0126;0.0250;0.0207;0.0016;0.0149;0.0090;0.0251" begin="0" dur="9.57s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
-                <animate attributeName="dy" keyTimes="0;0.2647;0.5423;0.5841;0.5883;0.7501;0.8890;1" values="0.0184;0.0126;0.0250;0.0207;0.0016;0.0149;0.0090;0.0251" begin="0" dur="9.57s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
-            </feOffset>
-            <feBlend mode="screen" in="red-shifted" in2="green" result="red-green"/>
-            <feBlend mode="screen" in="red-green" in2="blue-shifted" result="blended"/>
-            <feOffset in="blended" dx="0" dy="0" y="0%" height="6%" result="slice_0">
-                <animate attributeName="dx" keyTimes="0;0.3533;0.3945;0.4778;0.8412;0.9118;0.9762;1" values="0.0023;0.0088;0.0108;0.0125;0.0092;0.0127;0.0027;0.0084" begin="0s" dur="1.6355s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
-                <animate attributeName="dy" keyTimes="0;0.3533;0.3945;0.4778;0.8412;0.9118;0.9762;1" values="0.0023;0.0088;0.0108;0.0125;0.0092;0.0127;0.0027;0.0084" begin="0s" dur="1.6355s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
-            </feOffset>
-            <feOffset in="blended" dx="0" dy="0" y="6%" height="26%" result="slice_1">
-                <animate attributeName="dx" keyTimes="0;0.3160;0.6768;0.6928;0.8076;0.8811;0.9672;1" values="0.0079;0.0074;0.0107;0.0033;0.0119;0.0067;0.0070;0.0073" begin="0s" dur="1.7493s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
-                <animate attributeName="dy" keyTimes="0;0.3160;0.6768;0.6928;0.8076;0.8811;0.9672;1" values="0.0079;0.0074;0.0107;0.0033;0.0119;0.0067;0.0070;0.0073" begin="0s" dur="1.7493s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
-            </feOffset>
-            <feOffset in="blended" dx="0" dy="0" y="32%" height="10%" result="slice_2">
-                <animate attributeName="dx" keyTimes="0;0.1164;0.3560;0.7653;0.8200;0.9080;0.9235;1" values="0.0031;0.0011;0.0095;0.0030;0.0021;0.0125;0.0110;0.0073" begin="0s" dur="1.4082s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
-                <animate attributeName="dy" keyTimes="0;0.1164;0.3560;0.7653;0.8200;0.9080;0.9235;1" values="0.0031;0.0011;0.0095;0.0030;0.0021;0.0125;0.0110;0.0073" begin="0s" dur="1.4082s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
-            </feOffset>
-            <feOffset in="blended" dx="0" dy="0" y="42%" height="8%" result="slice_3">
-                <animate attributeName="dx" keyTimes="0;0.1791;0.2069;0.4204;0.4373;0.7437;0.9224;1" values="0.0123;0.0105;0.0120;0.0053;0.0067;0.0083;0.0038;0.0095" begin="0s" dur="1.1282s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
-                <animate attributeName="dy" keyTimes="0;0.1791;0.2069;0.4204;0.4373;0.7437;0.9224;1" values="0.0123;0.0105;0.0120;0.0053;0.0067;0.0083;0.0038;0.0095" begin="0s" dur="1.1282s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
-            </feOffset>
-            <feOffset in="blended" dx="0" dy="0" y="50%" height="6%" result="slice_4">
-                <animate attributeName="dx" keyTimes="0;0.2204;0.2582;0.2633;0.3458;0.5244;0.5397;1" values="0.0031;0.0065;0.0072;0.0087;0.0090;0.0014;0.0013;0.0067" begin="0s" dur="1.3618s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
-                <animate attributeName="dy" keyTimes="0;0.2204;0.2582;0.2633;0.3458;0.5244;0.5397;1" values="0.0031;0.0065;0.0072;0.0087;0.0090;0.0014;0.0013;0.0067" begin="0s" dur="1.3618s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
-            </feOffset>
-            <feOffset in="blended" dx="0" dy="0" y="56%" height="11%" result="slice_5">
-                <animate attributeName="dx" keyTimes="0;0.1968;0.3354;0.4156;0.4548;0.7475;0.8383;1" values="0.0068;0.0071;0.0097;0.0130;0.0119;0.0072;0.0050;0.0088" begin="0s" dur="1.5411s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
-                <animate attributeName="dy" keyTimes="0;0.1968;0.3354;0.4156;0.4548;0.7475;0.8383;1" values="0.0068;0.0071;0.0097;0.0130;0.0119;0.0072;0.0050;0.0088" begin="0s" dur="1.5411s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
-            </feOffset>
-            <feOffset in="blended" dx="0" dy="0" y="67%" height="13%" result="slice_6">
-                <animate attributeName="dx" keyTimes="0;0.0887;0.2142;0.4857;0.6041;0.7496;0.9835;1" values="0.0085;0.0071;0.0051;0.0128;0.0093;0.0123;0.0091;0.0074" begin="0s" dur="1.388s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
-                <animate attributeName="dy" keyTimes="0;0.0887;0.2142;0.4857;0.6041;0.7496;0.9835;1" values="0.0085;0.0071;0.0051;0.0128;0.0093;0.0123;0.0091;0.0074" begin="0s" dur="1.388s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
-            </feOffset>
-            <feOffset in="blended" dx="0" dy="0" y="80%" height="20%" result="slice_7">
-                <animate attributeName="dx" keyTimes="0;0.2669;0.5160;0.6021;0.7034;0.7622;0.9087;1" values="0.0124;0.0025;0.0119;0.0012;0.0105;0.0120;0.0037;0.0011" begin="0s" dur="1.4736s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
-                <animate attributeName="dy" keyTimes="0;0.2669;0.5160;0.6021;0.7034;0.7622;0.9087;1" values="0.0124;0.0025;0.0119;0.0012;0.0105;0.0120;0.0037;0.0011" begin="0s" dur="1.4736s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
-            </feOffset>
-            <feMerge>
-                <feMergeNode in="slice_0"/><feMergeNode in="slice_1"/><feMergeNode in="slice_2"/><feMergeNode in="slice_3"/><feMergeNode in="slice_4"/><feMergeNode in="slice_5"/><feMergeNode in="slice_6"/><feMergeNode in="slice_7"/>
-            </feMerge>
-            </filter>
-        </defs>
-    </svg>
+    <!--Glitch & Pixelation Filters-->
+        <svg xmlns="http://www.w3.org/2000/svg" style="position: absolute; width: 0; height: 0; overflow: hidden;" viewBox="0 0 340 120">
+            <defs>
+                <filter id="glitchHover" primitiveUnits="objectBoundingBox" x="-10%" y="0%" width="120%" height="100%">
+                <feColorMatrix in="SourceGraphic" result="red" type="matrix" values="1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0"/> 
+                <feColorMatrix in="SourceGraphic" result="green" type="matrix" values="0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0"/> 
+                <feColorMatrix in="SourceGraphic" result="blue" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0"/> 
+                <feOffset in="red" result="red-shifted" dx="-0.01" dy="0">
+                    <animate attributeName="dx" keyTimes="0;0.2257;0.2354;0.2757;0.3492;0.5235;0.8075;1" values="0.0107;0.0237;0.0177;0.0275;0.0219;0.0035;0.0228;0.0107" begin="0" dur="8.7s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
+                    <animate attributeName="dy" keyTimes="0;0.2257;0.2354;0.2757;0.3492;0.5235;0.8075;1" values="0.0107;0.0237;0.0177;0.0275;0.0219;0.0035;0.0228;0.0107" begin="0" dur="8.7s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
+                </feOffset>
+                <feOffset in="blue" result="blue-shifted" dx="0.01" dy="0">
+                    <animate attributeName="dx" keyTimes="0;0.2647;0.5423;0.5841;0.5883;0.7501;0.8890;1" values="0.0184;0.0126;0.0250;0.0207;0.0016;0.0149;0.0090;0.0251" begin="0" dur="9.57s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
+                    <animate attributeName="dy" keyTimes="0;0.2647;0.5423;0.5841;0.5883;0.7501;0.8890;1" values="0.0184;0.0126;0.0250;0.0207;0.0016;0.0149;0.0090;0.0251" begin="0" dur="9.57s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
+                </feOffset>
+                <feBlend mode="screen" in="red-shifted" in2="green" result="red-green"/>
+                <feBlend mode="screen" in="red-green" in2="blue-shifted" result="blended"/>
+                <feOffset in="blended" dx="0" dy="0" y="0%" height="6%" result="slice_0">
+                    <animate attributeName="dx" keyTimes="0;0.3533;0.3945;0.4778;0.8412;0.9118;0.9762;1" values="0.0023;0.0088;0.0108;0.0125;0.0092;0.0127;0.0027;0.0084" begin="0s" dur="1.6355s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
+                    <animate attributeName="dy" keyTimes="0;0.3533;0.3945;0.4778;0.8412;0.9118;0.9762;1" values="0.0023;0.0088;0.0108;0.0125;0.0092;0.0127;0.0027;0.0084" begin="0s" dur="1.6355s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
+                </feOffset>
+                <feOffset in="blended" dx="0" dy="0" y="6%" height="26%" result="slice_1">
+                    <animate attributeName="dx" keyTimes="0;0.3160;0.6768;0.6928;0.8076;0.8811;0.9672;1" values="0.0079;0.0074;0.0107;0.0033;0.0119;0.0067;0.0070;0.0073" begin="0s" dur="1.7493s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
+                    <animate attributeName="dy" keyTimes="0;0.3160;0.6768;0.6928;0.8076;0.8811;0.9672;1" values="0.0079;0.0074;0.0107;0.0033;0.0119;0.0067;0.0070;0.0073" begin="0s" dur="1.7493s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
+                </feOffset>
+                <feOffset in="blended" dx="0" dy="0" y="32%" height="10%" result="slice_2">
+                    <animate attributeName="dx" keyTimes="0;0.1164;0.3560;0.7653;0.8200;0.9080;0.9235;1" values="0.0031;0.0011;0.0095;0.0030;0.0021;0.0125;0.0110;0.0073" begin="0s" dur="1.4082s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
+                    <animate attributeName="dy" keyTimes="0;0.1164;0.3560;0.7653;0.8200;0.9080;0.9235;1" values="0.0031;0.0011;0.0095;0.0030;0.0021;0.0125;0.0110;0.0073" begin="0s" dur="1.4082s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
+                </feOffset>
+                <feOffset in="blended" dx="0" dy="0" y="42%" height="8%" result="slice_3">
+                    <animate attributeName="dx" keyTimes="0;0.1791;0.2069;0.4204;0.4373;0.7437;0.9224;1" values="0.0123;0.0105;0.0120;0.0053;0.0067;0.0083;0.0038;0.0095" begin="0s" dur="1.1282s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
+                    <animate attributeName="dy" keyTimes="0;0.1791;0.2069;0.4204;0.4373;0.7437;0.9224;1" values="0.0123;0.0105;0.0120;0.0053;0.0067;0.0083;0.0038;0.0095" begin="0s" dur="1.1282s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
+                </feOffset>
+                <feOffset in="blended" dx="0" dy="0" y="50%" height="6%" result="slice_4">
+                    <animate attributeName="dx" keyTimes="0;0.2204;0.2582;0.2633;0.3458;0.5244;0.5397;1" values="0.0031;0.0065;0.0072;0.0087;0.0090;0.0014;0.0013;0.0067" begin="0s" dur="1.3618s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
+                    <animate attributeName="dy" keyTimes="0;0.2204;0.2582;0.2633;0.3458;0.5244;0.5397;1" values="0.0031;0.0065;0.0072;0.0087;0.0090;0.0014;0.0013;0.0067" begin="0s" dur="1.3618s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
+                </feOffset>
+                <feOffset in="blended" dx="0" dy="0" y="56%" height="11%" result="slice_5">
+                    <animate attributeName="dx" keyTimes="0;0.1968;0.3354;0.4156;0.4548;0.7475;0.8383;1" values="0.0068;0.0071;0.0097;0.0130;0.0119;0.0072;0.0050;0.0088" begin="0s" dur="1.5411s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
+                    <animate attributeName="dy" keyTimes="0;0.1968;0.3354;0.4156;0.4548;0.7475;0.8383;1" values="0.0068;0.0071;0.0097;0.0130;0.0119;0.0072;0.0050;0.0088" begin="0s" dur="1.5411s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
+                </feOffset>
+                <feOffset in="blended" dx="0" dy="0" y="67%" height="13%" result="slice_6">
+                    <animate attributeName="dx" keyTimes="0;0.0887;0.2142;0.4857;0.6041;0.7496;0.9835;1" values="0.0085;0.0071;0.0051;0.0128;0.0093;0.0123;0.0091;0.0074" begin="0s" dur="1.388s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
+                    <animate attributeName="dy" keyTimes="0;0.0887;0.2142;0.4857;0.6041;0.7496;0.9835;1" values="0.0085;0.0071;0.0051;0.0128;0.0093;0.0123;0.0091;0.0074" begin="0s" dur="1.388s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
+                </feOffset>
+                <feOffset in="blended" dx="0" dy="0" y="80%" height="20%" result="slice_7">
+                    <animate attributeName="dx" keyTimes="0;0.2669;0.5160;0.6021;0.7034;0.7622;0.9087;1" values="0.0124;0.0025;0.0119;0.0012;0.0105;0.0120;0.0037;0.0011" begin="0s" dur="1.4736s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
+                    <animate attributeName="dy" keyTimes="0;0.2669;0.5160;0.6021;0.7034;0.7622;0.9087;1" values="0.0124;0.0025;0.0119;0.0012;0.0105;0.0120;0.0037;0.0011" begin="0s" dur="1.4736s" calcMode="discrete" repeatCount="indefinite" fill="freeze"/>
+                </feOffset>
+                <feMerge>
+                    <feMergeNode in="slice_0"/><feMergeNode in="slice_1"/><feMergeNode in="slice_2"/><feMergeNode in="slice_3"/><feMergeNode in="slice_4"/><feMergeNode in="slice_5"/><feMergeNode in="slice_6"/><feMergeNode in="slice_7"/>
+                </feMerge>
+                </filter>
+            </defs>
+        </svg>
+        <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
+            <filter id="pixelNoise" x="0" y="0">
+                <!-- Block -->
+                <feFlood x="4" y="4" height="1" width="1"/>
+                <!-- 2. Grid Size -->
+                <feComposite width="5" height="5"/>
+                <!-- Point Name-->
+                <feTile result="a"/>
+                <!-- Map the original gradient colors onto these tiles -->
+                <feComposite in="SourceGraphic" in2="a" operator="in"/>
+                <!-- Expand the tiny points to fill the tile size -->
+                <feMorphology operator="dilate" radius="2.5"/>
+
+                <!-- ADD THIS TO BOOST CONTRAST 
+                <feComponentTransfer>
+                <feFuncR type="gamma" amplitude="1.2" exponent="2" offset="-0.1"/>
+                <feFuncG type="gamma" amplitude="1.2" exponent="2" offset="-0.1"/>
+                <feFuncB type="gamma" amplitude="1.2" exponent="2" offset="-0.1"/>
+                </feComponentTransfer>-->
+            </filter> 
+        </svg>
     <div class="scroll-container">
             <h1 class="hero-title">What&rsquo;s the Point of You?<br><span>Purpose fit design in the digital age.</span></h1>
-            <section class="section-behind hero-section" id="lcd-screen">
+        <section class="section-behind hero-section" id="lcd-screen">
                     <!--Maclean's-->
                     <svg class="floating-logo" viewBox="0 0 126 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M27.222 9.95889C27.4792 8.21244 27.6931 6.72633 27.8065 5.09552H28.0918C28.2341 6.72633 28.4626 8.21244 28.7192 9.97299L29.5878 14.4328H26.3239L27.222 9.95889ZM25.1555 20.5955L25.5564 18.1705H30.3462L30.7471 20.5955H36.221L31.5306 0.39037H24.7706L20.1799 20.5955H25.1555ZM4.97789 20.5955V13.0197C4.97789 11.6487 4.92119 10.1476 4.79289 8.32952L5.00853 8.29816L7.53356 18.1808H11.8602L14.4334 8.31945L14.6258 8.32808C14.4975 10.1611 14.4546 11.6472 14.4546 13.0183L14.4259 20.5941H19.4439V0.39037H12.6223L11.2648 5.80147C10.7969 8.07292 10.3613 9.00986 9.89593 11.8739H9.61098C9.10523 9.05474 8.73121 8.18453 8.24207 5.80147L6.79871 0.39037H0V20.5955H4.97789ZM42.9659 20.9994C47.4709 20.9994 50.0653 18.6759 50.1649 12.9751L45.1472 11.9361C45.1046 15.7031 44.3488 16.8575 43.0801 16.8575C41.7258 16.8575 41.0703 15.7753 41.0703 13.5378V7.41904C41.0703 5.19621 41.7258 4.1137 43.0661 4.1137C44.4771 4.1137 45.1472 5.18211 45.1472 8.67444L50.0793 7.96677C50.0381 2.33877 47.6133 0.000575343 42.9659 0.000575343C38.1191 0.000575343 35.8381 2.81458 35.8381 8.6589V12.3264C35.8381 18.1863 38.0624 21 42.9659 21M62.2107 20.5955V16.3092H56.522V0.390082H51.3474V20.5952L62.2107 20.5955ZM74.8886 20.5955V16.3092H68.4309V12.1812H74.1188V8.47249H68.4309V4.67667H74.632V0.39037H63.2563V20.5955H74.8886ZM82.6361 9.95889C82.8927 8.21244 83.1037 6.72633 83.2208 5.09552H83.5061C83.6484 6.72633 83.8761 8.21244 84.1327 9.97299L85.0013 14.4328H81.7368L82.6361 9.95889ZM80.5715 20.5955L80.9725 18.1705H85.7622L86.1631 20.5955H91.637L86.9415 0.39037H80.1841L75.5939 20.5955H80.5715ZM97.3864 20.5955V14.4618C97.3864 12.5422 97.2441 10.1326 97.0585 8.09737L97.3578 8.03926C97.8255 10.0164 98.1708 11.1277 98.7548 12.73L101.863 20.5955H107.522V0.39037H102.504V6.9861C102.504 8.6169 102.633 10.4784 102.832 12.701L102.533 12.7441C102.091 11.0532 101.706 9.85821 101.263 8.71759L98.0852 0.39037H92.3687V20.5955H97.3864ZM118.543 20.9845C122.991 20.9845 126 18.7185 126 14.8507C126 11.1127 123.719 9.88582 121.709 8.8177L119.699 7.74958C117.59 6.6383 117.204 6.03218 117.204 5.29632C117.204 4.48451 117.872 3.89679 118.844 3.89679C120.341 3.89679 120.818 4.72759 121.083 6.82442L125.569 6.0247C125.51 2.18573 123.219 0 118.915 0C114.839 0 112.314 2.15034 112.3 5.77241C112.272 9.16405 114.353 10.5935 116.321 11.6754L118.288 12.7579C120.255 13.8402 120.911 14.5044 120.911 15.5435C120.911 16.4381 119.908 17.0733 118.785 17.0733C117.248 17.0733 116.708 16.1461 116.4 13.7711L111.656 14.6146C111.84 19.0113 113.966 20.9845 118.542 20.9845M110.754 6.58767L112.615 0.39037H109.051L108.26 5.55464L110.754 6.58767Z" fill="#751F26"/>
@@ -700,10 +767,29 @@
                         <path d="M5.27411 12.645C5.27411 13.4625 5.60072 14.2466 6.18208 14.8247C6.76344 15.4028 7.55193 15.7276 8.3741 15.7276C9.19627 15.7276 9.98476 15.4028 10.5661 14.8247C11.1475 14.2466 11.4741 13.4625 11.4741 12.645V6.16527H49.823C51.1085 6.16527 52.15 4.78425 52.15 3.08263C52.15 1.38102 51.1167 0 49.823 0H8.3741C7.0907 0 5.27411 1.38102 5.27411 3.08263V12.645Z" fill="#751F26"/>
                         <path d="M44.0364 15.7276C44.8585 15.7276 45.647 15.4028 46.2284 14.8247C46.8097 14.2466 47.1363 13.4625 47.1363 12.645C47.1363 11.8274 46.8097 11.0433 46.2284 10.4652C45.647 9.88711 44.8585 9.56233 44.0364 9.56233H18.9637C18.1415 9.56233 17.353 9.88711 16.7716 10.4652C16.1903 11.0433 15.8637 11.8274 15.8637 12.645C15.8637 13.4625 16.1903 14.2466 16.7716 14.8247C17.353 15.4028 18.1415 15.7276 18.9637 15.7276H44.0364Z" fill="#751F26"/>
                     </svg>
+                    <!--Hyundai-->
+                    <svg class="floating-logo" width="444" height="61" viewBox="0 0 444 61" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <path d="M170.529 8.6048V25.2824H151.592V8.6048H141.16V52.3796H151.592V34.7789H170.529V52.3796H180.961V8.6048H180.429H170.529Z" fill="#000000">
+                        </path>
+                        <path d="M219.212 8.6048L208.294 25.9395L197.393 8.6048H185.081L203.094 37.2196V52.3796H213.51V37.2196L231.523 8.6048H230.568H219.212Z" fill="#000000">
+                        </path>
+                        <path d="M265.091 8.6048V40.6771C265.095 40.9686 265.04 41.258 264.929 41.5277C264.819 41.7975 264.655 42.0421 264.447 42.2468C264.239 42.4514 263.992 42.6119 263.72 42.7186C263.448 42.8253 263.158 42.8759 262.866 42.8674H246.153V8.6048H235.721V52.4109H266.547C267.747 52.5074 268.953 52.3427 270.083 51.9282C271.213 51.5136 272.239 50.859 273.091 50.0096C273.943 49.1603 274.6 48.1364 275.017 47.0086C275.434 45.8808 275.601 44.6761 275.507 43.4776V8.6048H265.091Z" fill="#000000">
+                        </path>
+                        <path d="M316.013 8.60479H285.171V52.4109H295.603V18.0857H312.348C312.637 18.0815 312.925 18.1352 313.194 18.2436C313.463 18.352 313.707 18.5129 313.913 18.7169C314.119 18.921 314.282 19.1639 314.392 19.4317C314.502 19.6994 314.558 19.9864 314.556 20.276V52.3796H324.972V17.5694C325.033 16.3745 324.851 15.1798 324.44 14.0563C324.028 12.9328 323.394 11.9035 322.576 11.0298C321.702 10.205 320.67 9.565 319.542 9.14829C318.414 8.73159 317.214 8.54672 316.013 8.60479V8.60479Z" fill="#000000">
+                        </path>
+                        <path d="M365.478 8.60476H334.637V52.4109H365.478C366.675 52.4961 367.875 52.3219 368.998 51.9002C370.121 51.4784 371.139 50.8192 371.982 49.9677C372.826 49.1162 373.475 48.0925 373.885 46.9668C374.296 45.8412 374.458 44.6402 374.36 43.4463V17.5694C374.441 16.3646 374.274 15.156 373.87 14.0179C373.466 12.8798 372.833 11.8363 372.01 10.9515C371.135 10.1424 370.106 9.51756 368.983 9.11437C367.861 8.71118 366.669 8.53786 365.478 8.60476V8.60476ZM364.006 20.3385V40.6771C364.01 40.966 363.957 41.2529 363.85 41.5213C363.742 41.7896 363.583 42.0341 363.38 42.2406C363.178 42.4471 362.937 42.6116 362.67 42.7245C362.404 42.8375 362.118 42.8967 361.829 42.8987H345.053V18.0857H361.719C362.021 18.0702 362.323 18.1177 362.605 18.2251C362.887 18.3324 363.144 18.4973 363.359 18.7092C363.574 18.9211 363.743 19.1754 363.854 19.4559C363.966 19.7364 364.017 20.037 364.006 20.3385Z" fill="#000000">
+                        </path>
+                        <path d="M392.608 8.60476C391.409 8.54428 390.21 8.72808 389.085 9.14497C387.959 9.56186 386.93 10.2031 386.06 11.0297C385.235 11.8991 384.595 12.9273 384.181 14.0516C383.766 15.1759 383.585 16.3728 383.648 17.5694V52.3796H394.049V38.8466H413.002V52.3796H423.418V8.60476H392.608ZM412.97 18.0856V29.3657H394.018V20.3385C394.013 20.0402 394.069 19.744 394.182 19.4677C394.295 19.1914 394.462 18.9407 394.674 18.7304C394.886 18.5202 395.138 18.3547 395.416 18.2439C395.693 18.1331 395.99 18.0793 396.289 18.0856H412.97Z" fill="#003468">
+                        </path>
+                        <path d="M444.016 8.6048H433.584V52.3796H444.016V8.6048Z" fill="#000000">
+                        </path>
+                        <path d="M59.6313 61.0156C92.5248 61.0156 119.247 47.3575 119.247 30.5078C119.247 13.6581 92.5561 0 59.6313 0C26.7064 0 0 13.6581 0 30.4922C0 47.3262 26.6281 61.0156 59.6313 61.0156ZM70.8464 46.0433C69.8596 48.3275 68.1523 53.1931 64.2207 55.2113C62.9725 55.7878 61.6172 56.0969 60.2422 56.1187C59.9602 56.1187 59.7409 56.1187 59.6469 56.1187C49.5783 56.1951 39.5525 54.8037 29.8861 51.9885L29.5415 51.8633C28.7583 51.5973 28.3511 51.2375 28.3511 50.7838C28.3612 50.5975 28.4094 50.4153 28.493 50.2484C28.5765 50.0815 28.6935 49.9336 28.8367 49.8138L29.3849 49.3444C31.3272 47.6861 37.2637 43.368 48.5571 39.1126C53.1308 37.2564 57.8446 35.7655 62.6543 34.6538C65.5521 33.981 76.7516 32.2601 70.8464 46.0277V46.0433ZM100.983 15.2852C101.071 15.0881 101.21 14.9185 101.387 14.7944C101.563 14.6704 101.77 14.5967 101.986 14.5812C102.432 14.573 102.869 14.7164 103.223 14.9879C110.225 19.2903 114.376 24.6566 114.376 30.4765C114.376 41.0056 100.842 50.0328 81.482 53.9441C80.2446 54.1944 79.4144 54.1788 79.1324 53.9441C78.8505 53.7094 78.8818 53.4122 79.1324 53.0054C79.2796 52.7484 79.4528 52.5073 79.6493 52.2857C90.1909 39.8792 98.2107 21.5745 100.498 16.3021C100.67 15.8797 100.842 15.5199 100.983 15.2852ZM48.5571 14.8941C49.5439 12.5943 51.2513 7.68171 55.1828 5.72608C56.4303 5.14737 57.786 4.83816 59.1614 4.81867C59.459 4.81867 59.6783 4.81867 59.7566 4.81867C69.825 4.74539 79.8504 6.13674 89.5174 8.94896L89.8307 9.07412C90.6295 9.34009 91.0368 9.69992 91.0368 10.1536C91.0284 10.338 90.9808 10.5185 90.897 10.6831C90.8133 10.8477 90.6954 10.9925 90.5512 11.108L90.003 11.593C88.139 13.2513 82.1712 17.5537 70.9404 21.903C66.3673 23.7648 61.6534 25.261 56.8432 26.3775C53.8827 26.9564 42.6519 28.6617 48.5571 14.8941ZM37.7649 6.97769C39.018 6.74301 39.8325 6.74301 40.1301 6.97769C40.2272 7.11498 40.2793 7.27895 40.2793 7.44704C40.2793 7.61513 40.2272 7.77909 40.1301 7.91639C39.9698 8.16849 39.7918 8.40897 39.5975 8.63606C29.056 21.1208 21.0362 39.4411 18.7963 44.7292C18.624 45.089 18.4517 45.4488 18.3107 45.6835C18.2255 45.8835 18.0869 46.0564 17.9102 46.1833C17.7335 46.3102 17.5253 46.3862 17.3083 46.4032C16.8629 46.4032 16.4292 46.2606 16.0708 45.9964C9.06922 41.694 4.91837 36.3121 4.91837 30.4922C4.87138 19.9787 18.4047 10.9515 37.7649 6.97769Z" fill="#000000">
+                        </path>
+                    </svg>
         </section>
         <div class="hero-fade"></div>
         <section class="section-above testimonial-section">
-            <div class="testimonial-wrapper">
+            <div class="testimonial-wrapper"> <!--EJ-->
                 <button class="slideArrow prev">↢</button>
                 <button class="slideArrow next">↣</button>
                 <div class="slider-container">
@@ -720,7 +806,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Impasse:</span> Describe a visual medium without words.</p>
+                                    <p><span>Impasse:</span> How do you capture a qualitative service in a brand?</p>
                                 </div>
                             </div>
                         </div>
@@ -744,7 +830,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Intent:</span> A logo communicating technical prowess, retro photography, and modern methods.<p>
+                                    <p><span>Intent:</span> A brand mark that communicates focus, detail, and vividity.<p>
                                 </div>
                             </div>
                         </div>
@@ -756,7 +842,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Impact:</span> <i>See Above</i><p>
+                                    <p><span>Impact:</span> <i>See Below</i><p>
                                 </div>
                             </div>
                         </div>
@@ -768,10 +854,17 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Impact:</span> <i>See Above</i><p>
+                                    <p><span></span><p>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="contextBlock">
+                    <div class="contextCard">
+                        <h2>Brand</h2>
+                        <p>Elyse Jocelyn Photography needed a concrete identity for a growing business that could adapt as it bloomed. The result is a logo and brand mark that’s versatile, distinct, and&mdash;with its stylistic nod to retro photography&mdash;timeless.</p>
+                        <div class="flex-buffer"></div>
                     </div>
                 </div>
             </div>
@@ -791,7 +884,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Impasse:</span> Describe a visual medium without words.</p>
+                                    <p><span>Impasse:</span> New reader retention.</p>
                                 </div>
                             </div>
                         </div>
@@ -803,7 +896,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Insight:</span> EJ is selling their perspective.</p>
+                                    <p><span>Insight:</span> <i>Maclean’s</i> has a legacy but that isn’t enough for new readers.</p>
                                 </div>
                             </div>
                         </div>
@@ -815,7 +908,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Intent:</span> A logo communicating technical prowess, retro photography, and modern methods.<p>
+                                    <p><span>Intent:</span> Clear value statements, compelling newsletters, and useful tools.<p>
                                 </div>
                             </div>
                         </div>
@@ -827,7 +920,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Impact:</span> <i>See Above</i><p>
+                                    <p><span>Impact:</span> <i>See Below</i><p>
                                 </div>
                             </div>
                         </div>
@@ -839,7 +932,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Impact:</span> <i>See Above</i><p>
+                                    <p><span></span><p>
                                 </div>
                             </div>
                         </div>
@@ -851,10 +944,18 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Impact:</span> <i>See Above</i><p>
+                                    <p><span></span><p>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="contextBlock">
+                    <div class="contextCard">
+                        <h2>Web</h2>
+                        <p>At <i>Maclean’s</i> my work was interacted with by more than 15 million users in 2021 and with the new implementations we saw an 800% growth rate in new subscriptions – and that includes on <i>Chatelaine</i>, <i>Ch&acirctelaine</i>, and <i>Today’s Parent's</i> sites as well.
+                        <br>
+                        <br>In my time at St. Joseph Communications I contributed front-end code and design expertise across all 13 brands as well as to various studio clients.</p>
                     </div>
                 </div>
             </div>
@@ -874,7 +975,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Impasse:</span> Describe a visual medium without words.</p>
+                                    <p><span>Impasse:</span> A new journal's design has to be distinct but not distracting.</p>
                                 </div>
                             </div>
                         </div>
@@ -886,7 +987,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Insight:</span> EJ is selling their perspective.</p>
+                                    <p><span>Insight:</span> <i>Raconteur’s</i> art submissions provide an opportunity for colour harmony.</p>
                                 </div>
                             </div>
                         </div>
@@ -898,7 +999,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Intent:</span> A logo communicating technical prowess, retro photography, and modern methods.<p>
+                                    <p><span>Intent:</span> Bold. Blunt. Bunting.<p>
                                 </div>
                             </div>
                         </div>
@@ -910,10 +1011,16 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Impact:</span> <i>See Above</i><p>
+                                    <p><span>Impact:</span> A journal that appreciates its content without letting white pages and type dominate.<p>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="contextBlock">
+                    <div class="contextCard">
+                        <h2>Editorial</h2>
+                        <p>Ephemeral as journals like <i>Raconteur</i> can be, art directing an inaugural issue is about establishing an identity on the first print and creating a solid foundation for issues to come. Influenced by editorial design in magazines, I pushed white-space to colour-space to connect the art to the writing and leave the formalities to the stories themselves.</p>
                     </div>
                 </div>
             </div>
@@ -933,7 +1040,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Impasse:</span> Describe a visual medium without words.</p>
+                                    <p><span>Impasse:</span> An established company needs an update.</p>
                                 </div>
                             </div>
                         </div>
@@ -945,7 +1052,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Insight:</span> EJ is selling their perspective.</p>
+                                    <p><span>Insight:</span> Toronto Woodworks&rsquo; products speak for themselves – let the voice match.</p>
                                 </div>
                             </div>
                         </div>
@@ -957,7 +1064,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Intent:</span> A logo communicating technical prowess, retro photography, and modern methods.<p>
+                                    <p><span>Intent:</span> Capture historied carpentry and modern tools in solid structure.<p>
                                 </div>
                             </div>
                         </div>
@@ -969,7 +1076,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Impact:</span> <i>See Above</i><p>
+                                    <p><span></span><p>
                                 </div>
                             </div>
                         </div>
@@ -981,7 +1088,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Impact:</span> <i>See Above</i><p>
+                                    <p><span></span><p>
                                 </div>
                             </div>
                         </div>
@@ -993,7 +1100,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Impact:</span> <i>See Above</i><p>
+                                    <p><span></span><p>
                                 </div>
                             </div>
                         </div>
@@ -1005,10 +1112,16 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Impact:</span> <i>See Above</i><p>
+                                    <p><span></span><p>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="contextBlock">
+                    <div class="contextCard">
+                        <h2>SEO</h2>
+                        <p><a href=”https://torontowoodworks.ca/”>Toronto Woodworks</a>&rsquo; aesthetics are inspired by mid-century modern luxury and refined Japanese minimalism but their style of business rejects pomp and ceremony for dependable approachability; their branding and voice needed to match that. After I developed a brand identity and brought TO Woodworks’ website into alignment with modern SEO and accessibility standards, we saw a 300% increase in web traffic and unique visitors (a third coming from organic search), and an improved conversion rate, making the new site more than competitive.</p>
                     </div>
                 </div>
             </div>
@@ -1028,7 +1141,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Impasse:</span> Describe a visual medium without words.</p>
+                                    <p><span>Impasse:</span> A battle between genre conventions and bronze-age sensibilities.</p>
                                 </div>
                             </div>
                         </div>
@@ -1040,7 +1153,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Insight:</span> EJ is selling their perspective.</p>
+                                    <p><span>Insight:</span> Uniqueness can be derived from structure as much as detail.</p>
                                 </div>
                             </div>
                         </div>
@@ -1052,7 +1165,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Intent:</span> A logo communicating technical prowess, retro photography, and modern methods.<p>
+                                    <p><span>Intent:</span> Impressionist harmony behind writhing complexity.<p>
                                 </div>
                             </div>
                         </div>
@@ -1064,7 +1177,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Impact:</span> <i>See Above</i><p>
+                                    <p><span>Impact:</span> A logotype that respects the heritage but makes no bones about who Arktheos are.<p>
                                 </div>
                             </div>
                         </div>
@@ -1076,10 +1189,16 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Impact:</span> <i>See Above</i><p>
+                                    <p><span></span><p>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="contextBlock">
+                    <div class="contextCard">
+                        <h2>Merchandise</h2>
+                        <p>For the uninitiated, Death Metal bands trade on inscrutable logotypes; for Arktheos (from the greek, <i style="white-space: nowrap;">Arktos–</i> (ἄρκος), meaning north or bear, and <i style="white-space: nowrap;">–theos</i> (θεός), meaning god) I took this standard and injected sacred geometry into the structure and mapped the letters to nodes that match the Ursa Major constellation. The result is a logotype or sigil that evokes the cosmological and prehistoric themes of their music, sowing an uneasy harmony on any surface it meets – vinyl, pixel, or otherwise.</p>
                     </div>
                 </div>
             </div>
@@ -1099,7 +1218,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Impasse:</span> Describe a visual medium without words.</p>
+                                    <p><span>Impasse:</span> Art against linear thinking.</p>
                                 </div>
                             </div>
                         </div>
@@ -1111,7 +1230,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Insight:</span> EJ is selling their perspective.</p>
+                                    <p><span>Insight:</span> A blend of science, satire, and literature.</p>
                                 </div>
                             </div>
                         </div>
@@ -1123,7 +1242,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Intent:</span> A logo communicating technical prowess, retro photography, and modern methods.<p>
+                                    <p><span>Impact:</span> You tell me.<p>
                                 </div>
                             </div>
                         </div>
@@ -1135,7 +1254,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Impact:</span> <i>See Above</i><p>
+                                    <p><span></span><p>
                                 </div>
                             </div>
                         </div>
@@ -1147,7 +1266,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Impact:</span> <i>See Above</i><p>
+                                    <p><span></span><p>
                                 </div>
                             </div>
                         </div>
@@ -1159,7 +1278,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Impact:</span> <i>See Above</i><p>
+                                    <p><span></span><p>
                                 </div>
                             </div>
                         </div>
@@ -1171,7 +1290,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Impact:</span> <i>See Above</i><p>
+                                    <p><span></span><p>
                                 </div>
                             </div>
                         </div>
@@ -1183,7 +1302,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Impact:</span> <i>See Above</i><p>
+                                    <p><span></span><p>
                                 </div>
                             </div>
                         </div>
@@ -1195,7 +1314,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Impact:</span> <i>See Above</i><p>
+                                    <p><span></span><p>
                                 </div>
                             </div>
                         </div>
@@ -1207,7 +1326,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Impact:</span> <i>See Above</i><p>
+                                    <p><span></span><p>
                                 </div>
                             </div>
                         </div>
@@ -1219,10 +1338,16 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Impact:</span> <i>See Above</i><p>
+                                    <p><span></span><p>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="contextBlock">
+                    <div class="contextCard">
+                        <h2>Art</h2>
+                        <p>There’s an important distinction between art and design – purpose. The AlternateUniversePR project straddles that boundary. Demonstrated here on Seoul's subway network, the posters are intended to be quizzical and confounding, offering snippets of authors and artists’ words that conjure up other worlds and commentary on our own. Even the name, &lsquo;Alternate,&rsquo; is played against its more appropriate counterpart, &lsquo;Alternative,&rsquo; to ask viewers how their realities are defined or eclipsed.</p>
                     </div>
                 </div>
             </div>
@@ -1242,7 +1367,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Impasse:</span> Describe a visual medium without words.</p>
+                                    <p><span>Impasse:</span> What is a book before its read?</p>
                                 </div>
                             </div>
                         </div>
@@ -1254,7 +1379,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Insight:</span> EJ is selling their perspective.</p>
+                                    <p><span>Insight:</span> A book is an object and an invitation.</p>
                                 </div>
                             </div>
                         </div>
@@ -1266,7 +1391,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Intent:</span> A logo communicating technical prowess, retro photography, and modern methods.<p>
+                                    <p><span>Intent:</span> Invite the right reader.<p>
                                 </div>
                             </div>
                         </div>
@@ -1278,7 +1403,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Impact:</span> <i>See Above</i><p>
+                                    <p><span>Impact:</span> A series of experiments in what gets a book off a shelf.<p>
                                 </div>
                             </div>
                         </div>
@@ -1290,7 +1415,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Impact:</span> <i>See Above</i><p>
+                                    <p><span></span><p>
                                 </div>
                             </div>
                         </div>
@@ -1302,7 +1427,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Impact:</span> <i>See Above</i><p>
+                                    <p><span></span><p>
                                 </div>
                             </div>
                         </div>
@@ -1314,7 +1439,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Impact:</span> <i>See Above</i><p>
+                                    <p><span></span><p>
                                 </div>
                             </div>
                         </div>
@@ -1326,7 +1451,7 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Impact:</span> <i>See Above</i><p>
+                                    <p><span></span><p>
                                 </div>
                             </div>
                         </div>
@@ -1338,10 +1463,16 @@
                                     <blockquote><span></span></blockquote>
                                 </div>
                                 <div class="imgCaption">
-                                    <p><span>Impact:</span> <i>See Above</i><p>
+                                    <p><span></span><p>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="contextBlock">
+                    <div class="contextCard">
+                        <h2>Publication</h2>
+                        <p>These covers are a selection from my experiments in cover design. Some are unique, some have alternates. They represent my process aside from client work as these covers didn’t come with briefs or editorial board direction. Publishing is already risky and so publishers tend to be more risk averse; these tests are an exercise in finding subtle ways to break convention (at no cost). The only limitation I placed on myself was to focus on the cover – no relying on die cuts or exposed spines. I’m lucky enough to have held <a href="/words">a range of positions</a> on the production side of publishing, while you won’t see these covers on shelves any time soon, you might see their influence in my print-ready books and typesetting.</p>
                     </div>
                 </div>
             </div>

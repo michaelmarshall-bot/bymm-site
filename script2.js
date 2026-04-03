@@ -156,78 +156,240 @@ testimonialWrappers.forEach((wrapper) => {
 
 //DESIGN PAGE
 
-    //Design Page Hero Logic
+    //Design Page Logo Spread Hero Logic
+    (() => {
+        const container = document.querySelector('.hero-section');
+        const logos = Array.from(document.querySelectorAll('.floating-logo'));
 
-    const container = document.querySelector('.hero-section');
-    const logos = Array.from(document.querySelectorAll('.floating-logo'));
-
-    if (!container || logos.length === 0) return;
-
-    const rows = 8; 
-    const cols = 8;
-    const cells = [];
-
-    // Rows 3-4 and columns 2-5 excluded to create a clearing for text
-    for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < cols; c++) {
-            const isTextRow = r >= 3 && r <= 4;
-            const isTextCol = c >= 2 && c <= 5;
-
-            if (!(isTextRow && isTextCol)) {
-                cells.push({ r, c });
+        if (container && logos.length > 0) {
+            const rows = 8; 
+            const cols = 8;
+            const cells = [];
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    if (!(r >= 3 && r <= 4 && c >= 2 && c <= 5)) {
+                        cells.push({ r, c });
+                    }
+                }
             }
+            const shuffledCells = cells.sort(() => Math.random() - 0.5);
+            logos.forEach((logo, index) => {
+                if (index >= shuffledCells.length) {
+                    logo.style.display = 'none'; 
+                    return;
+                }
+                const { r, c } = shuffledCells[index];
+                const jitterTop = (Math.random() * 4) - 2; 
+                const jitterLeft = (Math.random() * 4) - 2;
+                const top = (r * (100 / rows)) + (100 / rows / 2) + jitterTop;
+                const left = (c * (100 / cols)) + (100 / cols / 2) + jitterLeft;
+                logo.style.top = `${top}%`;
+                logo.style.left = `${left}%`;
+                logo.style.transform = `translate(-50%, -50%)`;
+            });
         }
-    }
+    })(); // End Logo Spread
 
-    // 2. Shuffle cells for organic distribution
-    const shuffledCells = cells.sort(() => Math.random() - 0.5);
+    // --- DESIGN PAGE HERO FLICKER ---
+    (() => {
+        const heroElements = document.querySelectorAll('.hero-title, .floating-logo, .hero-anim');
+        
+        // Only proceed if these elements actually exist on the current page
+        if (heroElements.length > 0) {
+            function triggerRandomFlicker() {
+                const nextWait = Math.floor(Math.random() * (18000 - 12000 + 1)) + 12000;
 
-    // 3. Position logos
-    logos.forEach((logo, index) => {
-        if (index >= shuffledCells.length) {
-            logo.style.display = 'none'; 
+                setTimeout(() => {
+                    heroElements.forEach(el => el.classList.add('is-flickering'));
+
+                    setTimeout(() => {
+                        heroElements.forEach(el => el.classList.remove('is-flickering'));
+                        triggerRandomFlicker(); 
+                    }, 1000); 
+                }, nextWait);
+            }
+
+            // Start the loop
+            setTimeout(triggerRandomFlicker, 6000);
+        }
+    })(); // End Flicker Logic
+
+
+
+// Noise Page Logic
+   // --- NOISE PAGE LOGIC (Refined Integration) ---
+const audio = document.getElementById('audio-player');
+const svg = document.getElementById('tapeMachine');
+
+// 1. Debugging Check
+if (!audio || !svg) {
+    console.error("Tape Machine Error: Missing Elements", { audio, svg });
+} else {
+    console.log("Tape Machine Initialized: Elements found.");
+    
+    const ui = {
+        playBtn: document.getElementById('play-pause-btn'),
+        stopBtn: document.getElementById('stop-btn'),
+        skipBtn: document.getElementById('skip-btn'),
+        vol: document.getElementById('volume-slider'),
+        progress: document.getElementById('progress-bar'),
+        playIcon: document.getElementById('play-icon'),
+        current: document.getElementById('current-time'),
+        duration: document.getElementById('duration')
+    };
+
+    const machine = {
+        path: svg.querySelector('#Tape'),
+        tapeTab: svg.querySelector('#tapeTab'),
+        meterL: svg.querySelector('#meterLeft'),
+        meterR: svg.querySelector('#meterRight'),
+        stopBtnSVG: svg.querySelector('#button13'),
+        playBtnsSVG: ['button5', 'button10', 'button12', 'button14'].map(id => svg.querySelector(`#${id}`)),
+        faders: Array.from({length: 7}, (_, i) => svg.querySelector(`#fader${i + 1}`)),
+        knobs: ['smknob1', 'smknob2', 'smknob3', 'smknob4', 'knob1', 'knob2'].map(id => svg.querySelector(`#${id}`))
+    };
+
+    const spools = {
+        anti: ['tape1', 'tape2', 'supplyReel', 'spool1', 'spool5'].map(id => svg.querySelector(`#${id}`)),
+        clock: ['spool2', 'spool3', 'spool4'].map(id => svg.querySelector(`#${id}`)),
+        takeup: svg.querySelector('#takeupReel')
+    };
+
+    let audioCtx, analyser, dataArray, source;
+    let animationFrameId;
+    let tapeStartTime = null;
+    let pausedTimeOffset = 0;
+    const tapeLoopDuration = 5000;
+
+    const initAudio = () => {
+        if (audioCtx) return;
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        analyser = audioCtx.createAnalyser();
+        source = audioCtx.createMediaElementSource(audio);
+        source.connect(analyser);
+        analyser.connect(audioCtx.destination);
+        analyser.fftSize = 64; 
+        dataArray = new Uint8Array(analyser.frequencyBinCount);
+    };
+
+    const randomizeHardware = () => {
+        machine.knobs.forEach(k => k && (k.style.transform = `rotate(${Math.round(Math.random() * 160 - 80)}deg)`));
+        machine.faders.forEach(f => f && (f.style.transform = `translateY(-${(Math.random() * 13.4).toFixed(2)}px)`));
+    };
+
+    const resetHardware = (fullStop = false) => {
+        machine.faders.forEach(f => f && (f.style.transform = `translateY(0)`));
+        machine.playBtnsSVG.forEach(b => b && b.classList.remove('btn-pressed'));
+        if (fullStop) {
+            if (machine.meterL) machine.meterL.style.transform = `rotate(60deg)`;
+            if (machine.meterR) machine.meterR.style.transform = `rotate(-60deg)`;
+        }
+    };
+
+    const animate = (currentTime) => {
+        if (audio.paused) {
+            cancelAnimationFrame(animationFrameId);
             return;
         }
 
-        const { r, c } = shuffledCells[index];
-
-        // Small jitter (±3%) keeps it from looking like a perfect table
-        // Constrain the random jitter so the logo stays inside its grid cell
-        const jitterTop = (Math.random() * 4) - 2; 
-        const jitterLeft = (Math.random() * 4) - 2;
-
-        // Apply positions (using the 8x8 grid logic from before)
-        const top = (r * (100 / rows)) + (100 / rows / 2) + jitterTop;
-        const left = (c * (100 / cols)) + (100 / cols / 2) + jitterLeft;
+        if (!tapeStartTime) tapeStartTime = currentTime - pausedTimeOffset;
+        const elapsed = currentTime - tapeStartTime;
+        const progress = (elapsed % tapeLoopDuration) / tapeLoopDuration;
         
-        // Apply position without rotation
-        logo.style.top = `${top}%`;
-        logo.style.left = `${left}%`;
-        logo.style.transform = `translate(-50%, -50%)`;
+        const rot = (elapsed / 20) % 360; 
+        spools.anti.forEach(el => el && (el.style.transform = `rotate(-${rot}deg)`));
+        spools.clock.forEach(el => el && (el.style.transform = `rotate(${rot}deg)`));
+        if (spools.takeup) spools.takeup.style.transform = `rotate(-${rot * 1.05}deg)`;
+
+        if (machine.path && machine.tapeTab) {
+            const len = machine.path.getTotalLength();
+            const dist = len - (progress * len);
+            const p = machine.path.getPointAtLength(dist);
+            const nextDist = dist - 2 < 0 ? dist + 2 : dist - 2;
+            const nextP = machine.path.getPointAtLength(nextDist);
+            let angle = Math.atan2(nextP.y - p.y, nextP.x - p.x) * (180 / Math.PI);
+            if (dist - 2 < 0) angle += 180;
+            const w = parseFloat(machine.tapeTab.getAttribute('width')) || 0;
+            const h = parseFloat(machine.tapeTab.getAttribute('height')) || 0;
+            machine.tapeTab.setAttribute('transform', `translate(${p.x}, ${p.y}) rotate(${angle + 90}) translate(${-w/2}, ${-h/2})`);
+        }
+
+        if (analyser) {
+            analyser.getByteFrequencyData(dataArray);
+            const avg = dataArray.reduce((a, b) => a + b) / dataArray.length;
+            const bounce = (avg / 255) * 120;
+            if (machine.meterL) machine.meterL.style.transform = `rotate(${60 + bounce}deg)`;
+            if (machine.meterR) machine.meterR.style.transform = `rotate(${-60 - bounce}deg)`;
+        }
+
+        animationFrameId = requestAnimationFrame(animate);
+    };
+
+    // --- Events ---
+    ui.playBtn.addEventListener('click', () => {
+        if (audio.paused) {
+            initAudio();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            audio.play().then(() => {
+                ui.playIcon.className = 'pause-icon';
+                machine.playBtnsSVG.forEach(b => b && b.classList.add('btn-pressed'));
+                randomizeHardware();
+                // Reset sync
+                tapeStartTime = null; 
+                animationFrameId = requestAnimationFrame(animate);
+            }).catch(e => console.error("Playback failed:", e));
+        } else {
+            audio.pause();
+            ui.playIcon.className = 'play-icon';
+            // Capture progress to resume smoothly
+            pausedTimeOffset = performance.now() - (tapeStartTime || performance.now());
+            resetHardware();
+        }
     });
 
+    ui.stopBtn.addEventListener('click', () => {
+        audio.pause();
+        audio.currentTime = 0;
+        pausedTimeOffset = 0;
+        ui.playIcon.className = 'play-icon';
+        resetHardware(true);
+        if (machine.stopBtnSVG) {
+            machine.stopBtnSVG.classList.add('btn-pressed');
+            setTimeout(() => machine.stopBtnSVG.classList.remove('btn-pressed'), 250);
+        }
+    });
 
-    //Design Page Hero Flicker Logic
-    const hero = document.querySelectorAll('.hero-title, .floating-logo');
+    ui.skipBtn.addEventListener('click', () => {
+        audio.currentTime += 10;
+        randomizeHardware();
+    });
 
-    function triggerRandomFlicker() {
-        // 1. Generate random delay between 12,000ms and 18,000ms
-        const nextWait = Math.floor(Math.random() * (18000 - 12000 + 1)) + 12000;
-
-        setTimeout(() => {
-            // 2. Start the flicker
-            hero.forEach(el => el.classList.add('is-flickering'));
-
-            // 3. Stop it after 1 second
-            setTimeout(() => {
-                hero.forEach(el => el.classList.remove('is-flickering'));
-                triggerRandomFlicker();
-            }, 1000); 
-
-        }, nextWait);
+    if (ui.vol) {
+        ui.vol.addEventListener('input', (e) => audio.volume = e.target.value);
     }
 
-    // Start the loop after your initial 6s load animation finishes
-    setTimeout(triggerRandomFlicker, 6000);
+    // Time Formatter
+    const fmt = (s) => {
+        if (isNaN(s)) return "0:00";
+        const m = Math.floor(s / 60);
+        const sec = Math.floor(s % 60);
+        return `${m}:${sec < 10 ? '0' : ''}${sec}`;
+    };
+
+    audio.addEventListener('loadedmetadata', () => {
+        if (ui.duration) ui.duration.textContent = fmt(audio.duration);
+    });
+
+    audio.addEventListener('timeupdate', () => {
+        if (ui.progress) ui.progress.value = (audio.currentTime / audio.duration) * 100 || 0;
+        if (ui.current) ui.current.textContent = fmt(audio.currentTime);
+    });
+
+    if (ui.progress) {
+        ui.progress.addEventListener('input', () => {
+            audio.currentTime = (ui.progress.value / 100) * audio.duration;
+        });
+    }
+}
 
 });
