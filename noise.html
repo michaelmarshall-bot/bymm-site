@@ -34,7 +34,6 @@
         .hero-section {
             width: 100%;
             height: 100%;
-            min-height: 100vh; 
             bottom: 0;
             position: relative;
             display: grid;
@@ -42,45 +41,31 @@
             z-index: 8;
         }
 
-        /*.hero-title {
-            text-align: center;
-            color: var(--hed-colour);
-            z-index: 10;
-            max-width: 80vw;
-            margin: 0;
-            text-transform: none;
-            border: 1px solid var(--lcd-glow-color);
-            box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.5); 
-            padding: 1.5rem 2rem;
-            font: var(--font-body);
-            font-family: var(--hed-type);
-            font-weight: 900;
-            letter-spacing: calc(var(--hed-letterspace) + 1px);
-            font-size: clamp(1rem, 2vw, 2rem);
-            background-color: var(--bg-main);
-            position: fixed;
-            top: 50%; left: 50%; transform: translate(-50%, -50%);
-            animation: 
-                glitchLoad 6s ease-in-out none 1;
-            user-select: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-        }*/
-
     /*Tape Machine Styles*/
+        :root {
+            --tape-color: hsl(var(--card-hue), 70%, 60%);
+        }
 
-        /* 1. General Container */
         #tapeMachine {
             max-width: 1000px;
             display: block;
             height: 100%;
             width: 100%;
+            padding: 2vh;
+            position: fixed;
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
         }
 
-        /* 2. HIGH-SPEED ELEMENTS (JS DRIVEN)
-        These move every single frame (60fps). 
-        They MUST have 'transition: none' to prevent lag/stutter. */
+        @media (min-width: 640px) {
+            #tapeMachine {
+                padding: 4vh;
+            }
+        }
+
         #tapeTab, 
         #tape1, #tape2, #supplyReel, #takeupReel,
         #spool1, #spool2, #spool3, #spool4, #spool5,
@@ -90,14 +75,14 @@
             transform-origin: center;
         }
 
-        /* Specific origins for VU Meters (overrides the 'center' above) */
+        #tapeTab {
+            opacity: 0;
+            translate: -50% -50%;
+        }
+
         #meterLeft { transform-origin: left; }
         #meterRight { transform-origin: right; }
 
-
-        /* 3. MECHANICAL ELEMENTS (EVENT DRIVEN)
-        These only move when you press Play, Stop, or Skip.
-        We WANT a transition here to make the move look smooth. */
         #smknob1, #smknob2, #smknob3, #smknob4, 
         #knob1, #knob2 {
             transform-box: fill-box;
@@ -105,28 +90,44 @@
             transition: transform 0.3s ease-out;
         }
 
-        /* Faders use a bouncy 'spring' transition for extra character */
         [id^="fader"] { 
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
         }
 
-        /* 4. BUTTON STATES */
         [id^="button"] {
             transition: filter 0.1s, transform 0.1s;
         }
 
         .btn-pressed { 
-            filter: brightness(0.7); 
             transform: translateY(1px); 
         }
 
+        .btn-pressed rect {
+            fill: var(--tape-color);
+        }
+
+        .btn-pressed path {
+            fill: var(--tape-color);
+        }
+
+        /*SVG Internal Styles*/
+        .cls-52, .cls-34 {fill: var(--tape-color)}
+
 /* Audio Player */
+
+        .audio-card {
+            padding: var(--block-margin);
+            margin-top: unset;
+        }
+
         .tape-deck-ui {
-            background: #121212;
-            padding: 25px;
-            border-top: 2px solid #333;
-            color: #ff9d00;
+            background: var(--bg-main);
+            padding: 0px;
+            border: var(--border-std);
+            color: var(--tape-color);
             font-family: 'Courier New', Courier, monospace;
+            max-width: 600px;
+            margin: auto;
         }
 
         .controls-wrapper {
@@ -139,11 +140,13 @@
             align-items: center;
             gap: 15px;
             margin-bottom: 20px;
+            margin-left: 20px;
+            margin-right: 20px;
         }
 
         #progress-bar, #volume-slider {
             flex-grow: 1;
-            accent-color: #ff9d00;
+            accent-color: var(--tape-color);
             cursor: pointer;
         }
 
@@ -151,13 +154,15 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-left: 20px;
+            margin-right: 20px;
         }
 
         .transport-group { display: flex; gap: 15px; }
 
         .deck-btn {
-            background: #222;
-            border: 1px solid #444;
+            background-color: var(--bg-main);
+            border: none;
             width: 45px;
             height: 45px;
             cursor: pointer;
@@ -167,16 +172,251 @@
             border-radius: 2px;
         }
 
-        .deck-btn:active { background: #000; transform: translateY(1px); }
+        .deck-btn:active { background: var(--card-sub3); transform: translateY(1px); }
 
         /* Icons */
-        .play-icon { width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 15px solid #ff9d00; }
-        .pause-icon { width: 12px; height: 18px; border-left: 4px solid #ff9d00; border-right: 4px solid #ff9d00; }
-        .square { width: 15px; height: 15px; background: #ff9d00; }
-        .skip-icon { width: 0; height: 0; border-top: 8px solid transparent; border-bottom: 8px solid transparent; border-left: 12px solid #ff9d00; position: relative; }
-        .skip-icon::after { content: ''; position: absolute; right: -15px; top: -8px; width: 4px; height: 16px; background: #ff9d00; }
+        .play-icon { width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 15px solid var(--tape-color);}
+        .pause-icon { width: 12px; height: 18px; border-left: 4px solid var(--tape-color); border-right: 4px solid var(--tape-color); }
+        .square { width: 15px; height: 15px; background: var(--tape-color); }
+        .skip-icon { width: 0; height: 0; border-top: 8px solid transparent; border-bottom: 8px solid transparent; border-left: 12px solid var(--tape-color); position: relative; }
+        .skip-icon::after { content: ''; position: absolute; right: -15px; top: -8px; width: 4px; height: 16px; background: var(--tape-color); }
 
         .volume-group { display: flex; align-items: center; gap: 10px; width: 200px; }
+
+
+        /* Display Panel Styling */
+        .display-panel {
+            background: #0a0a0a;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+            box-shadow: inset 0 0 10px #000;
+        }
+
+        .display-panel .label {
+            font-size: 0.7rem;
+            color: var(--tape-color);
+            margin-bottom: 5px;
+        }
+
+        .title-text {
+            font-size: 1.2rem;
+            color: var(--bg-main);
+            text-shadow: 0 0 8px var(--tape-color);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Track List Styling */
+        .track-list-container {
+            padding-top: 15px;
+        }
+
+        #playlist {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .track-item {
+            padding: 10px;
+            border-bottom: 1px solid #000000;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .track-item:last-child {
+            border-bottom: none;
+        }
+
+        .track-item:hover {
+            border: var(--border-std);
+            border: solid 1px;
+            color: var(--tape-color);
+        }
+
+        .track-item.active {
+            color: var(--tape-color);
+            border: var(--border-std);
+            border: solid 1px;
+            border-left: 3px solid var(--tape-color);
+            padding-left: 15px;
+        }
+
+        /* Base Layout Fixes */
+        .interface-row {
+            display: flex;
+            flex-wrap: wrap; /* Allows wrapping on small screens */
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* Back Icon */
+        .back-icon { 
+            width: 0; height: 0; 
+            border-top: 8px solid transparent; 
+            border-bottom: 8px solid transparent; 
+            border-right: 12px solid var(--tape-color);
+            position: relative; 
+        }
+        .back-icon::before { 
+            content: ''; position: absolute; left: -4px; top: -8px; 
+            width: 4px; height: 16px; background: var(--tape-color);
+        }
+
+        @media (max-width: 768px) {
+            .interface-row {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .volume-group {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .title-text { font-size: 1rem; }
+        }
+
+        @media (max-width: 480px) {
+            .transport-group {
+                gap: 8px; /* Tighter buttons for small screens */
+            }
+
+            .deck-btn {
+                width: 50px; /* Larger touch targets */
+                height: 50px;
+            }
+
+            .scrub-zone span { font-size: 0.7rem; }
+            
+            .track-item {
+                padding: 15px 10px;
+                font-size: 0.8rem;
+            }
+            
+            .volume-group label { font-size: 0.6rem; }
+        }
+
+    /* Noise Context Section*/
+        
+        /*Transcript Button*/
+       
+
+        /*Transcripts*/
+
+        #transcript-btn {
+            max-width: 600px;
+            margin: auto;
+            padding: 0px;
+            display: flex;
+            flex-direction: row-reverse;
+            text-align: right;
+        }
+
+        #transcript-btn p {
+            background-color: var(--card-sub3);
+            border: var(--border-std);
+            border-top: none;
+            color: var(--hed-colour);
+            padding: 5px;
+        }
+
+        #transcript-btn.clicked p {
+            background-color: var(--card-sub1);
+            animation: glitchLoad 0.8s ease-in-out;
+        }
+
+        #transcript-btn.clicked p > span {
+            writing-mode: vertical-lr;
+        }
+
+        #transcript-section {
+            overflow: hidden;
+            max-height: 0;
+            transition: 0.4s ease-in-out;
+            padding: 0;
+        }
+
+        #transcript-section.expanded {
+            max-height: 5000px;
+            animation: glitchLoad 0.8s ease-in-out;
+            padding: 4rem 0;
+        }
+
+        .transcript p {
+            padding-bottom: var(--block-margin);
+        }
+
+        .transcript p:last-of-type {
+            padding-bottom: 0;
+        }
+        
+
+        /*Acoustics*/
+        .noiseContext {
+            flex-basis: 100%;
+            margin: auto;
+            padding: 4rem 0;
+        }
+
+        .contextCard {
+            margin: var(--block-margin);
+            flex-wrap: wrap;
+            display: flex;
+            align-items: end;
+            background: var(--bg-main);
+            border: var(--border-std);
+        }
+
+        .contextCard > a {
+            text-decoration: none;
+        }
+
+        .contextCard > a > span {
+            display: block;
+            font: var(--h2-styles);
+            padding: var(--h2-pad);
+            text-align: var(--type-align);
+            letter-spacing: var(--hed-letterspace);
+            line-height: var(--hero-lineheight);
+            width: 0vw;
+            overflow: visible;
+        }
+
+        .contextCard p {
+            margin-block-end: var(--block-margin);
+        }
+
+        .contextCard p:last-of-type {
+            margin-block-end: 0;
+        }
+
+        .contextCard > div:last-of-type {
+            max-width: 550px;
+            padding: var(--p-padding);
+            padding-top: calc(var(--p-padding-top) * 2);
+            align-self: center;
+            margin: auto;
+        }
+
+        @media (min-width: 585px) {
+        .contextCard > div:last-of-type {
+                padding-bottom: calc(var(--p-padding-top) * 2);
+            }
+        }
+
+        @media (min-width: 770px) {
+            .contextCard > a > span {
+                    display: content;
+                    padding-left: 2px;
+                }
+        }
+        
+
     </style>
 </head>
 <body>
@@ -243,10 +483,15 @@
             <?xml version="1.0" encoding="UTF-8"?>
             <div id="tapeMachine" class="hero-anim">
                 <?xml version="1.0" encoding="UTF-8"?>
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 660.67 622.67">
+                <svg id="tapeMachine-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 660.67 622.67">
                     <defs>
                         <style>
-                            .cls-1{stroke:url(#linear-gradient-6);}.cls-1,.cls-2,.cls-3,.cls-4,.cls-5,.cls-6,.cls-7,.cls-8,.cls-9,.cls-10,.cls-11,.cls-12,.cls-13,.cls-14,.cls-15,.cls-16,.cls-17,.cls-18,.cls-19,.cls-20,.cls-21,.cls-22,.cls-23,.cls-24,.cls-25,.cls-26,.cls-27,.cls-28,.cls-29,.cls-30,.cls-31,.cls-32,.cls-33,.cls-34,.cls-35,.cls-36,.cls-37,.cls-38,.cls-39,.cls-40,.cls-41,.cls-42,.cls-43,.cls-44,.cls-45,.cls-46,.cls-47{fill:none;}.cls-1,.cls-2,.cls-3,.cls-4,.cls-6,.cls-7,.cls-8,.cls-9,.cls-10,.cls-11,.cls-12,.cls-13,.cls-14,.cls-15,.cls-16,.cls-48,.cls-17,.cls-18,.cls-19,.cls-20,.cls-21,.cls-22,.cls-23,.cls-49,.cls-24,.cls-25,.cls-26,.cls-27,.cls-28,.cls-29,.cls-30,.cls-31,.cls-32,.cls-33,.cls-34,.cls-35,.cls-36,.cls-37,.cls-38,.cls-39,.cls-40,.cls-41,.cls-42,.cls-43,.cls-44,.cls-45,.cls-46,.cls-47{stroke-width:2px;}.cls-2{stroke:url(#linear-gradient-38);}.cls-3{stroke:url(#linear-gradient-44);}.cls-4{stroke:url(#linear-gradient-43);}.cls-5,.cls-50,.cls-48,.cls-49,.cls-26{stroke:#000;}.cls-5,.cls-50,.cls-48,.cls-49,.cls-26,.cls-34{stroke-miterlimit:10;}.cls-6{stroke:url(#linear-gradient-32);}.cls-7{stroke:url(#linear-gradient);}.cls-8{stroke:url(#linear-gradient-7);}.cls-9{stroke:url(#linear-gradient-13);}.cls-10{stroke:url(#linear-gradient-14);}.cls-11{stroke:url(#linear-gradient-21);}.cls-12{stroke:url(#linear-gradient-27);}.cls-13{stroke:url(#linear-gradient-12);}.cls-14{stroke:url(#linear-gradient-18);}.cls-51,.cls-50,.cls-49{fill:#fff;}.cls-15{stroke:url(#linear-gradient-17);}.cls-16{stroke:url(#linear-gradient-3);}.cls-17{stroke:url(#linear-gradient-26);}.cls-18{stroke:url(#linear-gradient-24);}.cls-19{stroke:url(#linear-gradient-10);}.cls-20{stroke:url(#linear-gradient-9);}.cls-21{stroke:url(#linear-gradient-35);}.cls-22{stroke:url(#linear-gradient-30);}.cls-23{stroke:url(#linear-gradient-16);}.cls-24{stroke:url(#linear-gradient-2);}.cls-25{stroke:url(#linear-gradient-8);}.cls-27{stroke:url(#linear-gradient-22);}.cls-28{stroke:url(#linear-gradient-33);}.cls-29{stroke:url(#linear-gradient-5);}.cls-30{stroke:url(#linear-gradient-4);}.cls-52{fill:#bb3330;}.cls-31{stroke:url(#linear-gradient-36);}.cls-32{stroke:url(#linear-gradient-42);}.cls-33{stroke:url(#linear-gradient-23);}.cls-34{stroke:#bb3330;}.cls-35{stroke:url(#linear-gradient-39);}.cls-36{stroke:url(#linear-gradient-20);}.cls-37{stroke:url(#linear-gradient-19);}.cls-38{stroke:url(#linear-gradient-34);}.cls-39{stroke:url(#linear-gradient-41);}.cls-40{stroke:url(#linear-gradient-40);}.cls-41{stroke:url(#linear-gradient-11);}.cls-42{stroke:url(#linear-gradient-29);}.cls-43{stroke:url(#linear-gradient-31);}.cls-44{stroke:url(#linear-gradient-15);}.cls-53{fill:#8c6239;}.cls-45{stroke:url(#linear-gradient-37);}.cls-46{stroke:url(#linear-gradient-28);}.cls-47{stroke:url(#linear-gradient-25);}
+                            :root {
+                                --svg-colour1: var(--tape-color);
+                            }
+                            .cls-1{stroke:url(#linear-gradient-6);}.cls-1,.cls-2,.cls-3,.cls-4,.cls-5,.cls-6,.cls-7,.cls-8,.cls-9,.cls-10,.cls-11,.cls-12,.cls-13,.cls-14,.cls-15,.cls-16,.cls-17,.cls-18,.cls-19,.cls-20,.cls-21,.cls-22,.cls-23,.cls-24,.cls-25,.cls-26,.cls-27,.cls-28,.cls-29,.cls-30,.cls-31,.cls-32,.cls-33,.cls-34,.cls-35,.cls-36,.cls-37,.cls-38,.cls-39,.cls-40,.cls-41,.cls-42,.cls-43,.cls-44,.cls-45,.cls-46,.cls-47{fill:none;}.cls-1,.cls-2,.cls-3,.cls-4,.cls-6,.cls-7,.cls-8,.cls-9,.cls-10,.cls-11,.cls-12,.cls-13,.cls-14,.cls-15,.cls-16,.cls-48,.cls-17,.cls-18,.cls-19,.cls-20,.cls-21,.cls-22,.cls-23,.cls-49,.cls-24,.cls-25,.cls-26,.cls-27,.cls-28,.cls-29,.cls-30,.cls-31,.cls-32,.cls-33,.cls-34,.cls-35,.cls-36,.cls-37,.cls-38,.cls-39,.cls-40,.cls-41,.cls-42,.cls-43,.cls-44,.cls-45,.cls-46,.cls-47{stroke-width:2px;}.cls-2{stroke:url(#linear-gradient-38);}.cls-3{stroke:url(#linear-gradient-44);}.cls-4{stroke:url(#linear-gradient-43);}.cls-5,.cls-50,.cls-48,.cls-49,.cls-26{stroke:#000;}.cls-5,.cls-50,.cls-48,.cls-49,.cls-26,.cls-34{stroke-miterlimit:10;}.cls-6{stroke:url(#linear-gradient-32);}.cls-7{stroke:url(#linear-gradient);}.cls-8{stroke:url(#linear-gradient-7);}.cls-9{stroke:url(#linear-gradient-13);}.cls-10{stroke:url(#linear-gradient-14);}.cls-11{stroke:url(#linear-gradient-21);}.cls-12{stroke:url(#linear-gradient-27);}.cls-13{stroke:url(#linear-gradient-12);}.cls-14{stroke:url(#linear-gradient-18);}
+                            .cls-51,.cls-50,.cls-49{fill:#fff;}
+                            .cls-15{stroke:url(#linear-gradient-17);}.cls-16{stroke:url(#linear-gradient-3);}.cls-17{stroke:url(#linear-gradient-26);}.cls-18{stroke:url(#linear-gradient-24);}.cls-19{stroke:url(#linear-gradient-10);}.cls-20{stroke:url(#linear-gradient-9);}.cls-21{stroke:url(#linear-gradient-35);}.cls-22{stroke:url(#linear-gradient-30);}.cls-23{stroke:url(#linear-gradient-16);}.cls-24{stroke:url(#linear-gradient-2);}.cls-25{stroke:url(#linear-gradient-8);}.cls-27{stroke:url(#linear-gradient-22);}.cls-28{stroke:url(#linear-gradient-33);}.cls-29{stroke:url(#linear-gradient-5);}.cls-30{stroke:url(#linear-gradient-4);}.cls-52{fill:var(--svg-colour1);}.cls-31{stroke:url(#linear-gradient-36);}.cls-32{stroke:url(#linear-gradient-42);}.cls-33{stroke:url(#linear-gradient-23);}.cls-34{stroke:var(--svg-colour1);}.cls-35{stroke:url(#linear-gradient-39);}.cls-36{stroke:url(#linear-gradient-20);}.cls-37{stroke:url(#linear-gradient-19);}.cls-38{stroke:url(#linear-gradient-34);}.cls-39{stroke:url(#linear-gradient-41);}.cls-40{stroke:url(#linear-gradient-40);}.cls-41{stroke:url(#linear-gradient-11);}.cls-42{stroke:url(#linear-gradient-29);}.cls-43{stroke:url(#linear-gradient-31);}.cls-44{stroke:url(#linear-gradient-15);}.cls-53{fill:#8c6239;}.cls-45{stroke:url(#linear-gradient-37);}.cls-46{stroke:url(#linear-gradient-28);}.cls-47{stroke:url(#linear-gradient-25);}
                         </style>
                         <!--Gradient Colours-->
                         <linearGradient id="linear-gradient" x1="-50.65" y1="660.17" x2="-50.65" y2="659.37" gradientTransform="translate(363041.33 -27689.67) rotate(-90) scale(550 -550)" gradientUnits="userSpaceOnUse">
@@ -257,12 +502,33 @@
                         <g id="Large_Structure">
                             <rect class="cls-51" x="50.12" y="86.16" width="561.84" height="525.61"/><path d="M610.96,87.16v523.61H51.12V87.16h559.84M612.96,85.16H49.12v527.61h563.84V85.16h0Z"/><path class="cls-51" d="M96.47,406.32c-.27,0-.55-.02-.83-.05-3.06-.38-5.48-2.88-5.75-5.95l-1.64-18.46c-.72-8.07.27-16.04,2.95-23.69l6.07-17.34c.92-2.64,3.42-4.41,6.21-4.41.27,0,.54.02.82.05,1.99.25,3.73,1.37,4.79,3.07s1.28,3.76.62,5.65l-4.99,14.23c-2.77,7.92-3.8,16.17-3.06,24.53l1.35,15.2c.17,1.86-.44,3.65-1.7,5.03-1.25,1.36-3.01,2.15-4.85,2.15,0,0,0,0,0,0Z"/><path d="M103.48,337.42c.23,0,.46.01.69.04,1.69.21,3.17,1.16,4.06,2.6s1.09,3.19.52,4.79l-4.99,14.23c-2.82,8.05-3.87,16.45-3.11,24.95l1.35,15.2c.14,1.58-.37,3.1-1.44,4.27-1.06,1.16-2.56,1.82-4.11,1.82-.23,0-.47-.01-.71-.04-2.59-.32-4.65-2.45-4.88-5.05l-1.64-18.46c-.71-7.93.27-15.76,2.9-23.27l6.07-17.34c.78-2.24,2.9-3.74,5.27-3.74M103.48,335.42c-3.19,0-6.08,2.01-7.16,5.08l-6.07,17.34c-2.71,7.73-3.73,15.95-3.01,24.11l1.64,18.46c.32,3.56,3.08,6.42,6.62,6.86.32.04.64.06.95.06,4.38,0,7.94-3.77,7.54-8.27l-1.35-15.2c-.73-8.16.3-16.38,3.01-24.11l4.99-14.23c1.6-4.57-1.42-9.44-6.23-10.04-.32-.04-.63-.06-.94-.06h0Z"/><path class="cls-51" d="M555.26,415.88c-2.12-.03-4.08-1-5.39-2.66-1.31-1.66-1.79-3.8-1.32-5.87l3.57-15.62c1.96-8.58,2.07-17.31.31-25.94l-3.16-15.52c-.42-2.06.1-4.17,1.43-5.8s3.3-2.56,5.4-2.56c3.35.04,6.18,2.39,6.83,5.58l3.85,18.9c1.7,8.35,1.6,16.79-.3,25.09l-4.34,18.97c-.73,3.19-3.52,5.42-6.79,5.42h-.09Z"/><path d="M556.1,340.91v2h.07c2.79.04,5.22,2.04,5.78,4.78l3.85,18.9c1.67,8.21,1.57,16.51-.29,24.67l-4.34,18.97c-.62,2.73-3.02,4.64-5.82,4.64h-.08c-1.81-.02-3.5-.85-4.62-2.28s-1.53-3.26-1.13-5.02l3.57-15.62c1.99-8.72,2.1-17.59.31-26.36l-3.16-15.52c-.36-1.76.09-3.57,1.23-4.97,1.14-1.39,2.82-2.19,4.62-2.19v-2M556.09,340.91c-5.03,0-8.81,4.62-7.81,9.56l3.16,15.52c1.72,8.43,1.61,17.13-.3,25.51l-3.57,15.62c-1.13,4.95,2.59,9.68,7.67,9.75.03,0,.07,0,.1,0,3.71,0,6.94-2.57,7.77-6.19l4.34-18.97c1.92-8.39,2.02-17.08.3-25.51l-3.85-18.9c-.75-3.68-3.96-6.33-7.71-6.38-.03,0-.07,0-.1,0h0Z"/><rect class="cls-51" x="211.74" y="325.72" width="235.76" height="117.51" rx="5" ry="5"/><path d="M442.49,326.72c2.21,0,4,1.79,4,4v107.51c0,2.21-1.79,4-4,4h-225.76c-2.21,0-4-1.79-4-4v-107.51c0-2.21,1.79-4,4-4h225.76M442.49,324.72h-225.76c-3.31,0-6,2.69-6,6v107.51c0,3.31,2.69,6,6,6h225.76c3.31,0,6-2.69,6-6v-107.51c0-3.31-2.69-6-6-6h0Z"/>
                         </g>
-                        <g class="tapeGroup">
-                            <path id="Tape" class="cls-26" d="M588.63,236.92s-21.13,144.5-21.53,148.19,5.92,10.33-5.25,18c-7.67,4.67-14.65-2.22-14.65-2.22l-35.28-41.54s-6.2-6.91-10.95-9.07-9.12-1.26-9.12-1.26c-12.24,1.83-51.54,25.22-51.54,25.22,0,0-27.4,24.82-102.96,24.82s-112.29-17.27-112.29-17.27c0,0-11.3-6.81-16.8-10.28s-28.53-21-28.53-21c0,0-4.96-2.84-10.96-2.84s-11.08,2.72-11.08,2.72c0,0-44.92,25.55-48.44,27.48s-5.54,6.9-13.65,5.79-9.66-9.72-9.66-9.72l-28.75-174.14"/>
-                            <rect id="tapeTab" class="cls-34" x="0" y="0" width=".07" height="5.48"/>
-                        </g>
+                        <path id="Tape" class="cls-26" d="M588.63,236.92s-21.13,144.5-21.53,148.19,5.92,10.33-5.25,18c-7.67,4.67-14.65-2.22-14.65-2.22l-35.28-41.54s-6.2-6.91-10.95-9.07-9.12-1.26-9.12-1.26c-12.24,1.83-51.54,25.22-51.54,25.22,0,0-27.4,24.82-102.96,24.82s-112.29-17.27-112.29-17.27c0,0-11.3-6.81-16.8-10.28s-28.53-21-28.53-21c0,0-4.96-2.84-10.96-2.84s-11.08,2.72-11.08,2.72c0,0-44.92,25.55-48.44,27.48s-5.54,6.9-13.65,5.79-9.66-9.72-9.66-9.72l-28.75-174.14"/>
+                        <rect id="tapeTab" class="cls-34" x="0" y="0" width=".07" height="5.48"/>
                         <g id="Interface">
-                                <rect id="fader2" class="cls-49" x="285.5" y="572.17" width="21.13" height="13.04"/><line class="cls-49" x1="296.06" y1="502.22" x2="296.06" y2="572.41"/><rect id="fader3" class="cls-49" x="308.96" y="572.17" width="21.13" height="13.04"/><line class="cls-49" x1="319.52" y1="502.22" x2="319.52" y2="572.41"/><rect id="fader4" class="cls-49" x="332.44" y="572.17" width="21.13" height="13.04"/><line class="cls-49" x1="343.01" y1="502.22" x2="343.01" y2="572.41"/><rect id="fader5" class="cls-49" x="356.06" y="572.17" width="21.13" height="13.04"/><line class="cls-49" x1="366.63" y1="502.22" x2="366.63" y2="572.41"/><rect id="fader6" class="cls-49" x="541.88" y="572.17" width="21.13" height="13.04"/><line class="cls-49" x1="552.45" y1="502.22" x2="552.45" y2="572.41"/><rect id="fader7" class="cls-49" x="565.92" y="572.17" width="21.13" height="13.04"/><line class="cls-49" x1="576.48" y1="502.22" x2="576.48" y2="572.41"/><rect id="fader1" class="cls-49" x="74.12" y="572.17" width="21.13" height="13.04"/><line class="cls-49" x1="84.68" y1="502.22" x2="84.68" y2="572.41"/><rect class="cls-26" x="150.46" y="504.58" width="59.61" height="66.66"/><circle class="cls-48" cx="230.09" cy="582.73" r="5.14"/><circle class="cls-48" cx="268.84" cy="582.73" r="5.14"/><circle class="cls-48" cx="393.51" cy="582.73" r="5.14"/><circle class="cls-48" cx="431.28" cy="582.73" r="5.14"/><circle class="cls-48" cx="469.95" cy="582.73" r="5.14"/><circle class="cls-48" cx="508.17" cy="582.73" r="5.14"/>
+                                
+                                <line class="cls-49" x1="296.06" y1="502.22" x2="296.06" y2="572.41"/>
+                                <rect id="fader2" class="cls-49" x="285.5" y="572.17" width="21.13" height="13.04"/>
+                                
+                                <line class="cls-49" x1="319.52" y1="502.22" x2="319.52" y2="572.41"/>
+                                <rect id="fader3" class="cls-49" x="308.96" y="572.17" width="21.13" height="13.04"/>
+                                
+                                <line class="cls-49" x1="343.01" y1="502.22" x2="343.01" y2="572.41"/>
+                                <rect id="fader4" class="cls-49" x="332.44" y="572.17" width="21.13" height="13.04"/>
+                                
+                                <line class="cls-49" x1="366.63" y1="502.22" x2="366.63" y2="572.41"/>
+                                <rect id="fader5" class="cls-49" x="356.06" y="572.17" width="21.13" height="13.04"/>
+                                
+                                <line class="cls-49" x1="552.45" y1="502.22" x2="552.45" y2="572.41"/>
+                                <rect id="fader6" class="cls-49" x="541.88" y="572.17" width="21.13" height="13.04"/>
+                               
+                                <line class="cls-49" x1="576.48" y1="502.22" x2="576.48" y2="572.41"/>
+                                <rect id="fader7" class="cls-49" x="565.92" y="572.17" width="21.13" height="13.04"/>
+                               
+                                <line class="cls-49" x1="84.68" y1="502.22" x2="84.68" y2="572.41"/>
+                                <rect id="fader1" class="cls-49" x="74.12" y="572.17" width="21.13" height="13.04"/>
+
+                                <rect class="cls-26" x="150.46" y="504.58" width="59.61" height="66.66"/>
+                                <circle class="cls-48" cx="230.09" cy="582.73" r="5.14"/><circle class="cls-48" cx="268.84" cy="582.73" r="5.14"/><circle class="cls-48" cx="393.51" cy="582.73" r="5.14"/><circle class="cls-48" cx="431.28" cy="582.73" r="5.14"/><circle class="cls-48" cx="469.95" cy="582.73" r="5.14"/><circle class="cls-48" cx="508.17" cy="582.73" r="5.14"/>
                                 <g id="button1">
                                     <rect class="cls-51" x="81.99" y="457.71" width="12.25" height="21.33"/><path d="M93.24,458.71v19.33h-10.25v-19.33h10.25M95.24,456.71h-14.25v23.33h14.25v-23.33h0Z"/>
                                 </g>
@@ -368,32 +634,91 @@
                 </svg>
             </div>
         </section>
-        <div class="tape-deck-ui">
-            <audio id="audio-player" src="assets/audio/harrysReelRWL.mp3" crossorigin="anonymous"></audio>
-            
-            <div class="controls-wrapper">
-                <div class="scrub-zone">
-                    <span id="current-time">0:00</span>
-                    <input type="range" id="progress-bar" value="0" min="0" max="100">
-                    <span id="duration">0:00</span>
-                </div>
-
-                <div class="interface-row">
-                    <div class="transport-group">
-                        <button class="deck-btn" id="stop-btn" title="Stop"><div class="square"></div></button>
-                        <button class="deck-btn" id="play-pause-btn" title="Play/Pause"><div class="play-icon" id="play-icon"></div></button>
-                        <button class="deck-btn" id="skip-btn" title="Skip Forward"><div class="skip-icon"></div></button>
+        <section id="subhero" class="section-above audio-card">
+            <div class="tape-deck-ui">
+                <audio id="audio-player" src="assets/audio/harrysReelRWL.mp3" crossorigin="anonymous"></audio>
+                
+                <div class="controls-wrapper">
+                    <div class="display-panel">
+                        <div class="label">NOW PLAYING</div>
+                        <div id="track-title" class="title-text">SELECT A TRACK</div>
                     </div>
 
-                    <div class="volume-group">
-                        <label for="volume-slider">VOL</label>
-                        <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.7">
+                    <div class="scrub-zone">
+                        <span id="current-time">0:00</span>
+                        <input type="range" id="progress-bar" value="0" min="0" max="100">
+                        <span id="duration">0:00</span>
+                    </div>
+
+                    <div class="interface-row">
+                        <div class="transport-group">
+                            <button class="deck-btn" id="prev-btn" title="Previous Track (Left Arrow)"><div class="back-icon"></div></button>
+                            <button class="deck-btn" id="stop-btn" title="Stop"><div class="square"></div></button>
+                            <button class="deck-btn" id="play-pause-btn" title="Play/Pause (Spacebar)"><div class="play-icon" id="play-icon"></div></button>
+                            <button class="deck-btn" id="next-btn" title="Next Track (Right Arrow)"><div class="skip-icon"></div></button>
+                        </div>
+
+                        <div class="volume-group">
+                            <label>VOL</label>
+                            <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.7">
+                        </div>
+                    </div>
+
+                    <div class="track-list-container">
+                        <ul id="playlist">
+                            <li class="track-item active" data-src="assets/audio/harrysReelRWL.mp3">01. ANALOG DREAMS</li>
+                            <li class="track-item" data-src="assets/audio/harrysReelRWL.mp3">02. SYNTHETIC WAVES</li>
+                            <li class="track-item" data-src="assets/audio/harrysReelRWL.mp3">03. TAPE HISS NOSTALGIA</li>
+                        </ul>
                     </div>
                 </div>
             </div>
-        </div>
-        <section class="section-above ">
-
+            <div id="transcript-btn"><p>Transcripts <span>☛</span></p></div>
+        </section>
+        <section class="section-above nav-card-section" id="transcript-section">
+            <div class="card">
+                <div>Transcript</div>
+                <a><span>Introduction</span></a>
+                <div>
+                    <span class="transcript">
+                        <p>“Hi – it’s Mike.</p> 
+                        <p>Here you’ll find samples of my music and audio work including scores, instrumentation, and narration.</p>
+                        <p>When it comes to voice over, I was born in the UK but I grew up all over the place so my natural speaking voice is a low baritone with a transatlantic accent. The beauty of my peripatetic upbringing is that I have a good ear for tone and inflection; I’m proficient in various Northern European, North American, and British regional accents – everything from received pronunciation to Georgian drawl. I also speak some German and have a basic understanding of Spanish.</p>
+                        <p>As far as music goes, I started life as a bassist and went on to manage session players, musicians, and studios before starting my career in the publishing industry. My specialties are in composition and atmospherics and after a lifetime of making noise, I’ve gotten pretty good at dampening it too (take a look below for more on that).</p>
+                        <p>So whether you’re looking for a distinctive voice, a score, or acoustic treatment, I’ve got you covered.</p>
+                        <p>For now, thanks for listening.”</p>
+                    </span>
+                </div>
+            </div>
+            <div class="card">
+                <div>Transcript</div>
+                <a><span>Tasmanian Devil Sample</span></a>
+                <div>
+                    <span class="transcript">
+                    <p>[Sample Text]</p>
+                    </span>
+                </div>
+            </div>
+            <div class="card">
+                <div>Transcript</div>
+                <a><span>Commercial Voice Over</span></a>
+                <div>
+                    <span class="transcript">
+                    <p>[Sample Text]</p>
+                    </span>
+                </div>
+            </div>
+        </section>
+        <section class="section-above noiseContext">
+            <div class="contextCard">
+                <a href="design"><span>Acoustics</span></a>
+                <div>
+                    <p>⚲<i> Toronto, Canada.</i></p>
+                    <p><b>Do you know your diffusers from your absorbers? Your bass traps from your baffles?</b></p>
+                    <p>If you’re looking for acoustic treatment for your office, home studio, or rehearsal room and you’re not sure where to start, get in touch. I can take the measurements, do the research, and make sure you get the right treatment for your needs – from basic panelling to custom builds and installations.</p>
+                    <p>I work in partnership with some of Toronto's best millworkers, including Henry McGuire – industrial designer and former sound engineer; together we can make sure your space looks <i>and sounds</i> great.</p>
+                </div>
+            </div>
         </section>
         <footer class="section-above main-footer">
             <div class="footer-id">
@@ -416,11 +741,11 @@
             <span>PWR</span>
         </div>
         <div class="tape-control">
-            <input checked type="radio" name="nav" id="btn-design">
+            <input type="radio" name="nav" id="btn-design">
             <label for="btn-design" class="btn-tape">Design</label>
         </div>
         <div class="tape-control">
-            <input type="radio" name="nav" id="btn-noise">
+            <input checked type="radio" name="nav" id="btn-noise">
             <label for="btn-noise" class="btn-tape">Noise</label>
         </div>
         <div class="tape-control">

@@ -24,6 +24,7 @@
     --h1-pad: calc((var(--type-ratio) * ((1.618) * 5)) * 1rem) 0px 0px 0px;
     --h2-pad: calc((var(--type-ratio) * ((1.618) * 2)) * 1em) 0px 2px 5px;
     --p-padding: calc((var(--type-ratio)) * 1em) 8px 5px 8px;
+    --p-padding-top: calc((var(--type-ratio)) * 1em);
     --type-align: left;
 
     /* PALETTE & EFFECTS */
@@ -278,9 +279,19 @@ IF REACTIVATING: comment in corresponding JS randomizer
 
 .hero-section .card.is-active {
     transition: 0.33s ease;
-    transform-origin: right;
-    transform: translate(110%);
+    transform-origin: top;
+    transform: translateY(-90%);
 }
+
+@media (min-width: 900px) {
+            
+    .hero-section .card.is-active {
+            transition: 0.33s ease;
+            transform-origin: right;
+            transform: translateY(0%);
+            transform: translateX(110%);
+        }
+    }
 
 #heroHover {
     width: 100%;
@@ -590,27 +601,13 @@ footer {
     gap: 3rem; border-top: 2px solid var(--hed-colour);
 }
 
-/*footer::after {
-    content: "";
-    pointer-events: none;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    border: none;
-    border-radius: var(--border-radius);
-    background-origin: border-box;
-    background-clip: border-box;
-    background-image: url("https://raw.githubusercontent.com/michaelmarshall-bot/bymm-site/refs/heads/main/assets/textures/grunge/040.jpg");
-    background-size: cover;
-    background-blend-mode: difference;
-    opacity: var(--texture-opacity);
-    z-index: 10;
-}*/
+.footer-id p:first-of-type {
+    text-transform: uppercase;
+    font-weight: 800;
+}
 
 footer p:nth-child(1) {
-    color: var(--sub-colour)
+    color: var(--sub-colour);
 }
 
 footer p:nth-child(2) {
@@ -618,7 +615,7 @@ footer p:nth-child(2) {
 }
 
 .footer-legal a {
-    color: var(--lcd-glow-color)
+    color: var(--lcd-glow-color);
 }
 
 .social-links a { color: var(--sub-colour); font-family: var(--font-detail); text-decoration: none; margin-right: 15px; font-weight: bold;}
@@ -694,3 +691,4 @@ a {
             0%, 100% { filter: none; }
             50% { filter: url(#glitchHover); }
         }
+
