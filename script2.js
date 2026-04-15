@@ -335,35 +335,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     //Lit Switch Animations
-    const toggle = document.querySelector('#litSwitch');
+    const toggle = document.querySelector('#litSwitch input');
     const target = document.querySelector('#glitchBody');
 
-    toggle.addEventListener('change', function() {
-    // Remove classes first to reset state
-    target.classList.remove('switchGlitch');
+    if (toggle && target) {
 
-    if (!this.checked) {
-        // 1. Trigger reflow to "restart" the animation
-        void target.offsetWidth; 
+        const handleToggle = (isInitialLoad = false) => {
+            target.classList.remove('switchGlitch');
+
+            if (toggle.checked) { 
+                if (isInitialLoad) return;
+                void target.offsetWidth; 
+                target.classList.add('switchGlitch');
+            }
+        };
+
+        toggle.addEventListener('change', () => handleToggle(false));
         
-        // 2. Apply the animation class ONLY for the unchecked state
-        target.classList.add('switchGlitch');
-    } else {
-        // When checked (ON), we just ensure the "off" animation is gone
-        // You can also add a simple "on" class here if needed
-        target.classList.remove('switchGlitch');
+        // Initialize
+        handleToggle(true);
     }
-    });
-    
-    const handleToggle = () => {
-    // If checked is true, 'switchGlitch' is REMOVED (false)
-    // If checked is false, 'switchGlitch' is ADDED (true)
-    glitchBody.classList.toggle('switchGlitch', !toggle.checked);
-    };
-
-    // Initialize and Listen
-    handleToggle();
-    toggle.addEventListener('change', handleToggle);
 
 });
 

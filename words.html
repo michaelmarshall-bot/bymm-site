@@ -141,7 +141,6 @@
             box-sizing: border-box;
             border-radius: 100px;
             border: 2px solid var(--main-color);
-            /*box-shadow: 4px 4px var(--main-color);*/
             position: absolute;
             cursor: pointer;
             top: 0;
@@ -174,11 +173,13 @@
         .toggle:checked + .slider {
             background-color: var(--input-focus);
             transform: translateX(-32px);
+            border-radius: 0px;
         }
 
         .toggle:checked + .slider:before {
             content: "off";
             transform: translateX(32px);
+            border-radius: 0px;
         }
 
         /*Hero Styles*/
@@ -235,7 +236,7 @@
             #heroType {
                 font: var(--h2-styles);
                 line-height: 0.8;
-                letter-spacing: var(--hed-letterspace);
+                letter-spacing: calc(var(--hero-letterspace) + 5px);
             }
             
         }
@@ -592,35 +593,43 @@
         }
 
         .cassette-menu.litMode {
-            position: fixed; z-index: 1000; bottom: 0rem; right: 0rem;
-            display: flex; align-items: center; justify-content: center; gap: 0px;
-            background: #222; padding: 14px 20px; border-radius: 4px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.8); border: 1px solid #333;
+            padding-bottom: 0px;
+            box-shadow: none; 
+            background: none;
+            border: none;
+            gap: 2px;
         }
 
         .led.litMode { display: none; }
         .power-indicator.litMode { display: none; }
 
         .btn-tape.litMode {
-            display: block; 
-            padding: 0.7rem 1.4rem; 
+            display: block;
+            padding: 0.7rem 1.4rem;
             cursor: pointer;
-            background: linear-gradient(180deg, #f5f5f5 0%, #aaaaaa 100%);
-            border: 1px solid #666; 
-            font-family: var(--font-detail); 
-            font-size: 0.75rem;
-            box-shadow: 0 6px 0 #444; 
-            transition: 0.1s; 
-            text-transform: uppercase; 
+            border: solid 2px var(--hed-colour);
+            border-bottom: 0px;
+            border-radius: 0px;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            font-family: var(--hed-type);
+            font-size: 1rem;
+            box-shadow: 0 6px 0 #222; 
+            transition: 0.1s;
+            text-transform: uppercase;
             color: #000;
+            transform: translateY(5px);
+            background: 
+                linear-gradient(180deg, hsl(from var(--bg-main) h 80 90)  0%, var(--bg-main) 40%);
+            filter: brightness(0.8); 
         }
 
         /* Pressed State */
         .tape-control.litMode input:checked + .btn-tape { 
-            transform: translateY(5px); 
-            box-shadow: 0 1px 0 #222; 
-            background: #999; 
-            filter: brightness(0.8); 
+            transform: translateY(0px); 
+            box-shadow: 0 6px 0 #444;
+            background: linear-gradient(180deg, hsl(from var(--bg-main) h 70 90)  0%, var(--bg-main) 45%);
+            filter: brightness(1); 
         }
 
         @keyframes pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
@@ -711,8 +720,33 @@
             to { -webkit-mask-position: 100% 0; mask-position: 100% 0; }
         }
 
+         .cassette-menu.ink-container.litMode {
+            animation: none;
+         }
+
+        .cassette-menu.ink-container.litMode .tape-control:last-of-type {
+            animation: up-slide 1s ease-in;
+        }
+
+        .cassette-menu.ink-container.litMode .tape-control:nth-of-type(3) {
+            animation: up-slide 1s ease-in 0.85s;
+            animation-fill-mode: both;
+        }
+
+        .cassette-menu.ink-container.litMode .tape-control:nth-of-type(2) {
+            animation: up-slide 1s ease-in 1s;
+            animation-fill-mode: both;
+        }
+
+
+         @keyframes up-slide {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0%); }
+        }
+
         /*Screen Effect*/
-       .switchGlitch {
+
+        .switchGlitch {
             animation: bodyGlitch 1s ease-out none 1;
         }
 
@@ -903,7 +937,7 @@
 
         <footer class="section-above main-footer">
             <div class="footer-id">
-                <p>Mike Marshall</p>
+                <p>M.S. Marshall</p>
                 <p>@bymsmarshall</p>
                 <div class="social-links">
                     <a href="mailto:getintouch@bymichaelmarshall.com">Email</a>
@@ -918,23 +952,23 @@
         </footer>
     </div>
 
-    <nav class="cassette-menu">
+    <nav class="cassette-menu ink-container">
         <div class="power-indicator">
             <div class="led"></div>
             <span>PWR</span>
         </div>
-        <div class="tape-control ink-container">
-            <input type="radio" name="nav" id="btn-design">
-            <label for="btn-design" class="btn-tape">Design</label>
-        </div>
-        <div class="tape-control ink-container">
-            <input type="radio" name="nav" id="btn-noise">
-            <label for="btn-noise" class="btn-tape">Noise</label>
-        </div>
-        <div class="tape-control ink-container">
-            <input checked type="radio" name="nav" id="btn-words">
-            <label for="btn-words" class="btn-tape">Words</label>
-        </div>
+            <div class="tape-control" onclick="window.location.href='/design'">
+                <input type="radio" name="nav" id="btn-design">
+                <label for="btn-design" class="btn-tape">Design</label>
+            </div>
+            <div class="tape-control" onclick="window.location.href='/noise'">
+                <input type="radio" name="nav" id="btn-noise">
+                <label for="btn-noise" class="btn-tape">Noise</label>
+            </div>
+            <div class="tape-control" onclick="window.location.href='/words'">
+                <input checked type="radio" name="nav" id="btn-words">
+                <label for="btn-words" class="btn-tape">Words</label>
+            </div>
     </nav>
 
     <script src="script2.js"></script>

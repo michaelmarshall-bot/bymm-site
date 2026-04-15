@@ -323,6 +323,7 @@
             border-top: none;
             color: var(--hed-colour);
             padding: 5px;
+            cursor: pointer;
         }
 
         #transcript-btn.clicked p {
@@ -715,8 +716,8 @@
                 <div>
                     <p>⚲<i> Toronto, Canada.</i></p>
                     <p><b>Do you know your diffusers from your absorbers? Your bass traps from your baffles?</b></p>
-                    <p>If you’re looking for acoustic treatment for your office, home studio, or rehearsal room and you’re not sure where to start, get in touch. I can take the measurements, do the research, and make sure you get the right treatment for your needs – from basic panelling to custom builds and installations.</p>
-                    <p>I work in partnership with some of Toronto's best millworkers, including Henry McGuire – industrial designer and former sound engineer; together we can make sure your space looks <i>and sounds</i> great.</p>
+                    <p>If you’re looking for acoustic treatment for your office, home studio, or rehearsal room and you’re not sure where to start, get in touch. Mike can take the measurements, do the research, and make sure you get the right treatment for your needs – from basic panelling to custom builds and installations.</p>
+                    <p>He works in partnership with some of Toronto's best millworkers, including Henry McGuire – industrial designer and former sound engineer; together they can make your space look <i>and sound</i> great.</p>
                 </div>
             </div>
         </section>
@@ -740,15 +741,15 @@
             <div class="led"></div>
             <span>PWR</span>
         </div>
-        <div class="tape-control">
+        <div class="tape-control" onclick="window.location.href='/design'">
             <input type="radio" name="nav" id="btn-design">
             <label for="btn-design" class="btn-tape">Design</label>
         </div>
-        <div class="tape-control">
+        <div class="tape-control" onclick="window.location.href='/noise'">
             <input checked type="radio" name="nav" id="btn-noise">
             <label for="btn-noise" class="btn-tape">Noise</label>
         </div>
-        <div class="tape-control">
+        <div class="tape-control" onclick="window.location.href='/words'">
             <input type="radio" name="nav" id="btn-words">
             <label for="btn-words" class="btn-tape">Words</label>
         </div>

@@ -625,14 +625,23 @@ a {
 }
 
 /* --- CASSETTE MENU --- */
+nav {
+    pointer-events: auto;
+}
+
 .cassette-menu {
     position: fixed; z-index: 1000; bottom: 0rem; right: 0rem;
     display: flex; align-items: center; justify-content: center; gap: 0px;
-    background: #222; padding: 14px 20px; border-radius: 4px;
+    background: #222; padding: 14px 20px; border-radius: 4px; border-bottom-right-radius: 0px;
     box-shadow: 0 10px 40px rgba(0,0,0,0.8); border: 1px solid #333;
+    pointer-events: inherit;
 }
 
-.led { width: 8px; height: 8px; background: #00ff00; border-radius: 50%; box-shadow: 0 0 12px #00ff00; animation: pulse 2s infinite; }
+.cassette-menu > a {
+    text-decoration: inherit;
+}
+
+.led { width: 8px; height: 8px; background: hsl(var(--card-hue), 70%, 60%); border-radius: 50%; box-shadow: 0 0 12px hsl(var(--card-hue), 70%, 60%); animation: pulse 2s infinite; }
 .power-indicator { padding-right: 15px; }
 .power-indicator span { font-family: var(--font-detail); font-size: 0.5rem; color: #888; }
 
