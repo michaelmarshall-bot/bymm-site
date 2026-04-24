@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 1. GLOBAL UI & UTILITY ---
+    // --- GLOBAL UI & UTILITY ---
     const yearEl = document.getElementById('year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    // --- 2. PARALLAX & VISUAL EFFECTS ---
+    // --- PARALLAX & VISUAL EFFECTS ---
     const dust = document.querySelector('.dust-overlay');
     const scanlines = document.querySelector('.scanlines');
     const screen = document.getElementById('lcd-screen');
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 4. TESTIMONIAL SLIDER ---
+    // --- TESTIMONIAL SLIDER ---
     document.querySelectorAll('.testimonial-wrapper').forEach((wrapper) => {
         const slider = wrapper.querySelector('.slider-container');
         const nextBtn = wrapper.querySelector('.slideArrow.next');
@@ -97,12 +97,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- 5. COLOR ROTATOR ---
+    // --- COLOR ROTATOR ---
     document.querySelectorAll('.card').forEach((el, index) => {
         el.style.setProperty('--card-hue', (index * 40) % 360);
     });
 
-    // --- 6. DESIGN PAGE LOGIC ---
+    // --- DESIGN PAGE LOGIC ---
     (() => {
         const container = document.querySelector('.hero-section');
         const logos = Array.from(document.querySelectorAll('.floating-logo'));
@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(triggerRandomFlicker, 6000);
     })();
 
-    // --- 7. NOISE PAGE ENGINE (ORIGINAL FIDELITY) ---
+    // --- NOISE PAGE ENGINE ---
     const audio = document.getElementById('audio-player');
     const svg = document.getElementById('tapeMachine');
 
@@ -155,6 +155,14 @@ document.addEventListener('DOMContentLoaded', () => {
         let audioCtx, analyser, dataArray, source, animationFrameId;
         let tapeStartTime = null, pausedTimeOffset = 0;
         const tapeLoopDuration = 5000;
+
+        // Helper to format seconds into M:SS
+        const formatTime = (seconds) => {
+            if (isNaN(seconds) || seconds === Infinity) return "0:00";
+            const m = Math.floor(seconds / 60);
+            const s = Math.floor(seconds % 60);
+            return `${m}:${s < 10 ? '0' : ''}${s}`;
+        };
 
         const machine = {
             path: svg.querySelector('#Tape'),
@@ -181,6 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
             progress: document.getElementById('progress-bar'),
             playIcon: document.getElementById('play-icon'),
             current: document.getElementById('current-time'),
+            duration: document.getElementById('duration'), // Reference to the duration span
             trackTitle: document.getElementById('track-title')
         };
 
@@ -255,6 +264,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (animationFrameId) cancelAnimationFrame(animationFrameId);
             audio.play().then(() => {
                 initAudio();
+                // Update duration when loading a new track via click or skip
+                if (ui.duration) ui.duration.textContent = formatTime(audio.duration);
                 if (ui.playIcon) ui.playIcon.className = 'pause-icon';
                 machine.playBtnsSVG.forEach(b => b?.classList.add('btn-pressed'));
                 if (machine.tapeTab) machine.tapeTab.style.opacity = "1";
@@ -268,6 +279,18 @@ document.addEventListener('DOMContentLoaded', () => {
         ui.playBtn?.addEventListener('click', () => {
             if (audio.paused) {
                 initAudio();
+                
+                // FIX: Sync title if it's still default
+                if (ui.trackTitle && ui.trackTitle.innerText === 'SELECT A TRACK') {
+                    const activeItem = document.querySelector('.track-item.active');
+                    if (activeItem) ui.trackTitle.innerText = activeItem.innerText;
+                }
+
+                // FIX: Sync duration immediately if metadata is already loaded
+                if (ui.duration && audio.duration) {
+                    ui.duration.textContent = formatTime(audio.duration);
+                }
+                
                 audio.play().then(() => {
                     if (machine.tapeTab) machine.tapeTab.style.opacity = "1";
                     ui.playIcon.className = 'pause-icon';
@@ -296,12 +319,15 @@ document.addEventListener('DOMContentLoaded', () => {
         ui.prevBtn?.addEventListener('click', () => { globalTrackIndex = loadTrack(globalTrackIndex - 1); });
         if (ui.vol) ui.vol.addEventListener('input', (e) => audio.volume = e.target.value);
 
+        // Metadata listener for tracks that haven't loaded yet
+        audio.addEventListener('loadedmetadata', () => {
+            if (ui.duration) ui.duration.textContent = formatTime(audio.duration);
+        });
+
         audio.addEventListener('timeupdate', () => {
             if (ui.progress) ui.progress.value = (audio.currentTime / audio.duration) * 100 || 0;
             if (ui.current) {
-                const m = Math.floor(audio.currentTime / 60);
-                const s = Math.floor(audio.currentTime % 60);
-                ui.current.textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
+                ui.current.textContent = formatTime(audio.currentTime);
             }
         });
 
@@ -312,7 +338,7 @@ document.addEventListener('DOMContentLoaded', () => {
         audio.addEventListener('ended', () => { globalTrackIndex = loadTrack(globalTrackIndex + 1); });
     }
 
-    // --- 8. MISC PAGE LOGICS ---
+    // --- MISC PAGE LOGICS ---
 
     // Transcript Toggle
     const transBtn = document.getElementById("transcript-btn");
@@ -363,7 +389,7 @@ function adjustMargin() {
     const hero = document.getElementById('tapeMachine');
     const subhero = document.getElementById('subhero');
     if (hero && subhero) {
-        subhero.style.marginTop = (hero.offsetWidth - 50) + 'px';
+        subhero.style.marginTop = (hero.offsetWidth - 30) + 'px';
     }
 }
 window.addEventListener('resize', adjustMargin);
