@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Words | by MM</title>
-    <link rel="stylesheet" href="styles2.css">
+    <link rel="stylesheet" href="styles.css">
     <!--Favicon-->
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/index2/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon/index2/favicon-32x32.png">
@@ -82,7 +82,8 @@
             }
 
             .hero-section.litMode {
-                z-index: 500
+                z-index: 500;
+                padding-bottom: calc(var(--gap)*2);
             }
             
             #poetsTagline {
@@ -757,6 +758,39 @@
             }
         }
 
+        /*Forthcoming Tag*/
+        .forthcoming {
+          border-right: solid 5px hsl(var(--card-hue), 70%, 60%);
+        }
+
+        .forthcomingTag {
+            font-style: italic;
+            margin-left: auto;
+            margin-right: 10%;
+            text-align: right;
+        }
+        .forthcomingTag span {
+            color: hsl(var(--card-hue), 70%, 60%);
+        }
+
+        .work-stack.litMode .forthcomingTag {
+             margin: auto;
+        }
+
+        .work-stack.litMode .forthcomingTag span:nth-child(1) {
+            display: none;
+        }
+
+        .work-stack .dagger {
+            display: none;
+            color: var(--litMode-hue);
+        }
+
+        .work-stack.litMode .dagger {
+            display: inline;
+            color: var(--litMode-hue);
+        }
+
     </style>
 </head>
 <body id="glitchBody">
@@ -879,20 +913,23 @@
 
         <section class="section-above work-section ink-container">
             <div class="work-stack" id="lcd-screen">
-                <div class="work-item">
+                <div class="forthcomingTag">Coming Soon &nbsp;<span><b>|</b></span><span class="dagger">&#8224;</span></div>
+                <div class="work-item forthcoming">
                     <div class="work-info">
                         <h3>“The Breaking of the Urn”</h3>
                         <span><i>Interim</i>, Vol. 41, Issue 1</span>
                     </div>
-                    <time>2026</time>
+                    <time>2026<span class="dagger">&#8224;</span></time>
                 </div>
-                <div class="work-item">
-                    <div class="work-info">
-                        <h3>“Fascists Planting Bulbs,”<br>“Fascists Raising Children,”<br>“Fascists Watching Birds.”</h3>
-                        <span><i>The New Absurdist</i></span>
+                <a href="https://newabsurdist.com/poetry/fascists-verbing-noun-a-collection/">
+                    <div class="work-item">
+                        <div class="work-info">
+                            <h3><i>Fascists Verbing Noun: A Collection</i></h3>
+                            <span><i>The New Absurdist</i></span>
+                        </div>
+                        <time>2026</time>
                     </div>
-                    <time>2026</time>
-                </div>
+                </a>
                 <a href="https://www.darkpoets.club/post/mr-jenkins">
                     <div class="work-item">
                         <div class="work-info">
@@ -918,13 +955,15 @@
                     </div>
                     <time>2025</time>
                 </div>
-                <div class="work-item">
-                    <div class="work-info">
-                        <h3>“Tasmanian Devil”</h3>
-                        <span><i>Lallans</i>, 93. (Yuil)</span>
+                <a href="https://bymichaelsmarshall.substack.com/p/tasmanian-devil">
+                    <div class="work-item">
+                        <div class="work-info">
+                            <h3>“Tasmanian Devil”</h3>
+                            <span><i>Lallans</i>, 93. (Yuil)</span>
+                        </div>
+                        <time>2018</time>
                     </div>
-                    <time>2018</time>
-                </div>
+                </a>
                 <div class="work-item">
                     <div class="work-info">
                         <h3>“The Irish, Hysteria, & Guy Fawkes: The Fenian Demonstration of Guy Fawkes Night 1864 and Upper Canada.”</h3>
@@ -971,6 +1010,6 @@
             </div>
     </nav>
 
-    <script src="script2.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
