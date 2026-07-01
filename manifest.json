@@ -1,11 +1,20 @@
 {
-    "name": "Starter",
-    "short_name": "Starter",
-    "icons": [{
-        "src": "favicon/android-chrome-manifest.png",
-        "sizes": "192x192"
-    }],
-    "background_color": "#fffff0",
-    "theme_color": "#fffff0",
-    "display": "fullscreen"
+  "name": "bymichaelmarshall.com",
+  "short_name": "byMM",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#f6f6f6",
+  "theme_color": "var(--card-hue)",
+  "icons": [
+    {
+      "src": "favicon/index2/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon/index2/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }
