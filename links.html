@@ -309,7 +309,6 @@
         }
 
         /*Latest Tag*/
-        /*Forthcoming Tag*/
 
         .latestTag {
             font-style: italic;
@@ -329,6 +328,18 @@
             border-top: 0px;
             box-shadow: 0 0 0.5px 0.5px rgba(0, 0, 0, 0.5);
             width: 79%;
+        }
+
+        /*Portrait*/
+        #portrait {
+            border: var(--border-std);
+            border-radius: 50%;
+            max-width: 120px;
+            margin: auto;
+            display: block;
+            position: relative;
+            z-index: 10;
+            bottom: -59px;
         }
 
     </style>
@@ -395,8 +406,11 @@
     </div>
     <div class="scroll-container">
         <section class="section-above pubHed-section ink-container">
+            <div >
+                <img id="portrait" src="/assets/portrait.png">
+            </div>
             <div class="card pubHed">
-            <div></div>
+                <div></div>
                 <a href="https://bymichaelmarshall.com/"><span>@bymsmarshall</span></a>
                 <div></div>
             </div>
@@ -405,6 +419,15 @@
         <section class="section-above work-section ink-container">
             <div class="work-stack" id="lcd-screen">
                 <div class="latestTag">Latest &nbsp;<span><b>|</b></span></div>
+                <a class="latest" href="https://bymichaelsmarshall.substack.com/p/theres-still-a-boat-in-new-bonaventure">
+                    <div class="work-item">
+                        <div class="work-info">
+                            <h3>&ldquo;There&rsquo;s Still a Boat in New Bonaventure&rdquo;</h3>
+                            <span><i>Substack</i> (First Published by <i>Paddler Press</i>)</span>
+                        </div>
+                        <time>☞</time>
+                    </div>
+                </a>
                 <a class="latest" href="https://www.interimpoetics.org/404/m-s-marshall">
                     <div class="work-item">
                         <div class="work-info">
