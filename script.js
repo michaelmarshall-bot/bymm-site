@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 150);
 
-    // --- 3. HERO CARD LOGIC ---
+    // --- HERO CARD LOGIC ---
     const card = document.querySelector('.hero-section .card');
     const footnote = document.querySelector('.footnote');
 
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!slider || !nextBtn || !prevBtn) return;
 
-    // 2. Consolidate scroll updates (arrows + tuner needle)
+    // Consolidate scroll updates (arrows + tuner needle)
     const updateProgress = () => {
         const scrollLeft = slider.scrollLeft;
         const maxScroll = slider.scrollWidth - slider.clientWidth;
