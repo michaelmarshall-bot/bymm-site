@@ -754,6 +754,22 @@
         }
         }
 
+        /*Ongoing Incident Marker
+        :root {
+        --adj-colour: rgb(53, 49, 253);
+        --inc-colour:  rgb(49, 253, 253);
+        }
+
+        .icon {
+            background-color: var(--inc-colour);
+        }
+
+        .ongoing > .icon {
+            border-radius: 50%;
+            border-color: var(--adj-colour);
+            background-color: rgba(0, 0, 0, 0);
+        }
+
         /*Colour Inversion*/
 
         body {
@@ -894,6 +910,26 @@
         <div class="hero-fade"></div>
         <section class="section-behind timelineSection">
             <div class="timeline">
+                <div class="container left ongoing">
+                    <div class="date">15 Sep</div>
+                    <i class="icon fa fa-user"></i>
+                    <div class="content">
+                    <h2>[War Correspondence] Bed Bug Eradication</h2>
+                    <p>
+                        Regional authorities have invoked an article of the Tenancy act in order to deploy chemical weapons in the region for the second time. The initial attack is believed to have originated across the Gulf of Hallway, where an attempted coup by the insurgents was foiled. The redeployment of prohibited armaments remains controversial. Supporters have described it as necessary for state security, while detractors describe the measures as excessive. The head of government remains magnanimous under questioning, making a clear statement that the insurgents are no longer a concern and a third deployment will not be necessary. Experts are certain in one respect, it will be several weeks until the region can fully recover from the chaos.
+                    </p>
+                    </div>
+                </div>
+                <div class="container right ongoing">
+                    <div class="date">15 Sep</div>
+                    <i class="icon fa fa-user"></i>
+                    <div class="content">
+                    <h2>[War Correspondence] Casualty Report</h2>
+                    <p>
+                        An aerial raid by the avian alliance has resulted in the Pigeon War's first confirmed fatality as a bomber collided with the battlements during the assault. The wreckage (of a mirror) and a body were recovered at the scene.
+                    </p>
+                    </div>
+                </div>
                 <div class="container left">
                     <div class="date">08 Sep</div>
                     <i class="icon fa fa-user"></i>
@@ -933,7 +969,7 @@
                     </p>
                     </div>
                 </div>
-                <div class="container left">
+                <div class="container left ongoing">
                     <div class="date">13 Jul</div>
                     <i class="icon fa fa-user"></i>
                     <div class="content">
